@@ -42,13 +42,11 @@ public class ExpressionBuilder {
     }
 
     public boolean isOperator(Character c) {
-        if ("()+-*/^".indexOf(c) != -1) return true;
-        return false;
+        return "()+-*/^".indexOf(c) != -1;
     }
 
     public static boolean isDelimeter(Character c) {
-        if (" ".indexOf(c) != -1) return true;
-        return false;
+        return " ".indexOf(c) != -1;
     }
     
     private static int getPriority(String s) {
