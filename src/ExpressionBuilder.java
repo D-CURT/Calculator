@@ -7,16 +7,15 @@ public class ExpressionBuilder {
         ArrayDeque<Character> operatorsQueue = new ArrayDeque<>();
 
         for (int i = 0; i < s.length(); i++) {
-            if (isDelimeter(s.charAt(i)))
-                continue;
 
             if (Character.isDigit(s.charAt(i))) {
-                while (!isOperator(s.charAt(i)) && !isDelimeter(s.charAt(i))) {
+                while (!isOperator(s.charAt(i))) {
                     list.add(String.valueOf(s.charAt(i)));
                     i++;
                     if (i == s.length()) break;
                 }
             }
+
             if (isOperator(s.charAt(i))) {
                 Character operator;
                 if (s.charAt(i) == '(') {
@@ -35,6 +34,7 @@ public class ExpressionBuilder {
                     operatorsQueue.push(s.charAt(i));
                 }
             }
+
         }
         while (!operatorsQueue.isEmpty())
             list.add(operatorsQueue.pop().toString());
@@ -43,10 +43,6 @@ public class ExpressionBuilder {
 
     public boolean isOperator(Character c) {
         return "()+-*/^".indexOf(c) != -1;
-    }
-
-    public static boolean isDelimeter(Character c) {
-        return " ".indexOf(c) != -1;
     }
     
     private static int getPriority(String s) {
