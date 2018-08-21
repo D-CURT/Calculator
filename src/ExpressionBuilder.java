@@ -1,16 +1,20 @@
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExpressionBuilder {
-    public List<String> getRPN(String s) {
-        ArrayList<String> list = new ArrayList<>();
+    public List<Character> getRPN(String s) {
+        ArrayList<Character> list = new ArrayList<>();
+        ArrayDeque<Character> operators = new ArrayDeque<>();
+        PriorityComparator priority = new PriorityComparator();
         StringBuilder current = new StringBuilder();
-        ArrayDeque<Character> operatorsQueue = new ArrayDeque<>();
+
 
         for (int i = 0; i < s.length(); i++) {
 
             if (Character.isDigit(s.charAt(i))) {
                 while (!isOperator(s.charAt(i))) {
-                    list.add(String.valueOf(s.charAt(i)));
+                    list.add(s.charAt(i));
                     i++;
                     if (i == s.length()) break;
                 }
@@ -19,33 +23,29 @@ public class ExpressionBuilder {
             if (isOperator(s.charAt(i))) {
                 Character operator;
                 if (s.charAt(i) == '(') {
-                    operatorsQueue.push(s.charAt(i));
+                    operators.push(s.charAt(i));
                 } else if (s.charAt(i) == ')') {
-                    operator = operatorsQueue.pop();
-                    while (!operatorsQueue.isEmpty() && operator != '(') {
-                        list.add(operator.toString());
-                        operator = operatorsQueue.pop();
+                    operator = operators.pop();
+                    while (operator != '(') {
+                        list.add(operator);
+                        operator = operators.pop();
                     }
                 } else {
-                    if (!operatorsQueue.isEmpty()) {
-                        while (getPriority(String.valueOf(s.charAt(i))) <= getPriority(operatorsQueue.peek().toString()))
-                            list.add(operatorsQueue.pop().toString());
+                    if (!operators.isEmpty()) {
+                        while (priority.compare(s.charAt(i), operators.peek()) < 1)
+                            list.add(operators.pop());
                     }
-                    operatorsQueue.push(s.charAt(i));
+                    operators.push(s.charAt(i));
                 }
             }
 
         }
-        while (!operatorsQueue.isEmpty())
-            list.add(operatorsQueue.pop().toString());
+        while (!operators.isEmpty())
+            list.add(operators.pop());
         return list;
     }
 
     public boolean isOperator(Character c) {
         return "()+-*/^".indexOf(c) != -1;
-    }
-    
-    private static int getPriority(String s) {
-        return new OperatorsComparable().compareTo(s);
     }
 }
