@@ -4,58 +4,54 @@ public class ExpressionBuilder {
     public List<String> getRPN(String s) {
         ArrayList<String> list = new ArrayList<>();
         StringBuilder current = new StringBuilder();
-        ArrayDeque<String> operatorsQueue = new ArrayDeque<>();
-        for (int i = 0; i < s.length(); i++) {
+        ArrayDeque<Character> operatorsQueue = new ArrayDeque<>();
 
-            if (isDelimeter(String.valueOf(s.charAt(i))))
+        for (int i = 0; i < s.length(); i++) {
+            if (isDelimeter(s.charAt(i)))
                 continue;
 
             if (Character.isDigit(s.charAt(i))) {
-                while (!isOperator(String.valueOf(s.charAt(i))) && !isDelimeter(String.valueOf(s.charAt(i)))) {
-                    /*current.append(s.charAt(i));*/
+                while (!isOperator(s.charAt(i)) && !isDelimeter(s.charAt(i))) {
                     list.add(String.valueOf(s.charAt(i)));
                     i++;
                     if (i == s.length()) break;
                 }
-                /*list.add(current.toString());
-                current.delete(0, current.length());*/
-                /*i--;*/
             }
-            if (isOperator(String.valueOf(s.charAt(i)))) {
-                String operator; /*String.valueOf(s.charAt(i));*/
+            if (isOperator(s.charAt(i))) {
+                Character operator;
                 if (s.charAt(i) == '(') {
-                    operatorsQueue.push(String.valueOf(s.charAt(i)));
+                    operatorsQueue.push(s.charAt(i));
                 } else if (s.charAt(i) == ')') {
                     operator = operatorsQueue.pop();
-                    while (!operator.equals("(")) {
-                        list.add(operator);
+                    while (!operatorsQueue.isEmpty() && operator != '(') {
+                        list.add(operator.toString());
                         operator = operatorsQueue.pop();
                     }
                 } else {
                     if (!operatorsQueue.isEmpty()) {
-                        while (getPriority(String.valueOf(s.charAt(i))) <= getPriority(operatorsQueue.peek()))
-                            list.add(operatorsQueue.pop());
+                        while (getPriority(String.valueOf(s.charAt(i))) <= getPriority(operatorsQueue.peek().toString()))
+                            list.add(operatorsQueue.pop().toString());
                     }
-                    operatorsQueue.push(String.valueOf(s.charAt(i)));
+                    operatorsQueue.push(s.charAt(i));
                 }
             }
         }
         while (!operatorsQueue.isEmpty())
-            list.add(operatorsQueue.pop());
+            list.add(operatorsQueue.pop().toString());
         return list;
     }
 
-    public boolean isOperator(String s) {
-        if ("()+-*/^".indexOf(s) != -1) return true;
+    public boolean isOperator(Character c) {
+        if ("()+-*/^".indexOf(c) != -1) return true;
         return false;
     }
 
-    public boolean isDelimeter(String s) {
-        if (" ".indexOf(s) != -1) return true;
+    public static boolean isDelimeter(Character c) {
+        if (" ".indexOf(c) != -1) return true;
         return false;
     }
     
-    private int getPriority(String s) {
+    private static int getPriority(String s) {
         return new OperatorsComparable().compareTo(s);
     }
 }
