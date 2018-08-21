@@ -33,7 +33,7 @@ public class ExpressionBuilder {
                     }
                 } else {
                     if (!operatorsQueue.isEmpty()) {
-                        if (getPriority(String.valueOf(s.charAt(i))) <= getPriority(operatorsQueue.peek()))
+                        while (getPriority(String.valueOf(s.charAt(i))) <= getPriority(operatorsQueue.peek()))
                             list.add(operatorsQueue.pop());
                     }
                     operatorsQueue.push(String.valueOf(s.charAt(i)));
