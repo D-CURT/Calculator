@@ -1,52 +1,57 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class ExpressionBuilder {
     public List<String> getRPN(String s) {
         ArrayList<String> list = new ArrayList<>();
         StringBuilder current = new StringBuilder();
-        PriorityQueue<String> operatorsQueue = new PriorityQueue<>(new OperatorsComparator());
-        char character;
+        ArrayDeque<String> operatorsQueue = new ArrayDeque<>();
         for (int i = 0; i < s.length(); i++) {
-            character = s.charAt(i);
-            if (Character.isDigit(character)) {
-                while (Character.isDigit(character)) {
-                    current.append(character);
+
+            if (isDelimeter(String.valueOf(s.charAt(i))))
+                continue;
+
+            if (Character.isDigit(s.charAt(i))) {
+                while (!isOperator(String.valueOf(s.charAt(i))) && !isDelimeter(String.valueOf(s.charAt(i)))) {
+                    /*current.append(s.charAt(i));*/
+                    list.add(String.valueOf(s.charAt(i)));
                     i++;
                     if (i == s.length()) break;
-                    character = s.charAt(i);
                 }
-                list.add(current.toString());
-                current.delete(0, current.length() - 1);
-                i--;
+                /*list.add(current.toString());
+                current.delete(0, current.length());*/
+                /*i--;*/
             }
-            if (isOperator(String.valueOf(character))) {
-                String operator = String.valueOf(character);
-                if (operator.equals("(")) {
-                    operatorsQueue.add(operator);
-                } else if (operator.equals(")")) {
-                    operator = operatorsQueue.poll();
+            if (isOperator(String.valueOf(s.charAt(i)))) {
+                String operator; /*String.valueOf(s.charAt(i));*/
+                if (s.charAt(i) == '(') {
+                    operatorsQueue.push(String.valueOf(s.charAt(i)));
+                } else if (s.charAt(i) == ')') {
+                    operator = operatorsQueue.pop();
                     while (!operator.equals("(")) {
                         list.add(operator);
-                        operator = operatorsQueue.poll();
+                        operator = operatorsQueue.pop();
                     }
+                } else {
+                    if (!operatorsQueue.isEmpty()) {
+                        if (getPriority(String.valueOf(s.charAt(i))) <= getPriority(operatorsQueue.peek()))
+                            list.add(operatorsQueue.pop());
+                    }
+                    operatorsQueue.push(String.valueOf(s.charAt(i)));
                 }
-                if (!operatorsQueue.isEmpty()) {
-                    if (getPriority(operator) <= getPriority(operatorsQueue.peek()))
-                        list.add(operatorsQueue.poll());
-                }
-                operatorsQueue.add(operator);
             }
         }
         while (!operatorsQueue.isEmpty())
-            list.add(operatorsQueue.poll());
+            list.add(operatorsQueue.pop());
         return list;
     }
 
     public boolean isOperator(String s) {
         if ("()+-*/^".indexOf(s) != -1) return true;
+        return false;
+    }
+
+    public boolean isDelimeter(String s) {
+        if (" ".indexOf(s) != -1) return true;
         return false;
     }
     
