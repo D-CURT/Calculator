@@ -2,19 +2,20 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionBuilder {
-    public List<Character> getRPN(String s) {
-        ArrayList<Character> list = new ArrayList<>();
+public class ReversePolishNotationBuilder {
+
+    public String getRPN(String s) {
         ArrayDeque<Character> operators = new ArrayDeque<>();
         PriorityComparator priority = new PriorityComparator();
-        StringBuilder current = new StringBuilder();
+        String space = " ";
+        StringBuilder result = new StringBuilder();
 
 
         for (int i = 0; i < s.length(); i++) {
 
             if (Character.isDigit(s.charAt(i))) {
                 while (!isOperator(s.charAt(i))) {
-                    list.add(s.charAt(i));
+                    result.append(s.charAt(i) + space);
                     i++;
                     if (i == s.length()) break;
                 }
@@ -27,13 +28,13 @@ public class ExpressionBuilder {
                 } else if (s.charAt(i) == ')') {
                     operator = operators.pop();
                     while (operator != '(') {
-                        list.add(operator);
+                        result.append(operator + space);
                         operator = operators.pop();
                     }
                 } else {
                     if (!operators.isEmpty()) {
                         while (priority.compare(s.charAt(i), operators.peek()) < 1)
-                            list.add(operators.pop());
+                            result.append(operators.pop() + space);
                     }
                     operators.push(s.charAt(i));
                 }
@@ -41,11 +42,13 @@ public class ExpressionBuilder {
 
         }
         while (!operators.isEmpty())
-            list.add(operators.pop());
-        return list;
+            result.append(operators.pop() + (operators.isEmpty() ? "" : space));
+        return result.toString();
     }
 
     public boolean isOperator(Character c) {
         return "()+-*/^".indexOf(c) != -1;
     }
+
+
 }

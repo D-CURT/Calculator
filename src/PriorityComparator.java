@@ -9,4 +9,5 @@ public class PriorityComparator implements Comparator<Character> {
         int second = p.compareTo(o2);
         return (first > second)? 1 : (first < second)? -1 : 0;
     }
+
 }
