@@ -15,7 +15,7 @@ public class ReversePolishNotationBuilder {
 
             if (Character.isDigit(s.charAt(i))) {
                 while (!isOperator(s.charAt(i))) {
-                    result.append(s.charAt(i) + space);
+                    result.append(s.charAt(i)).append(space);
                     i++;
                     if (i == s.length()) break;
                 }
@@ -28,13 +28,13 @@ public class ReversePolishNotationBuilder {
                 } else if (s.charAt(i) == ')') {
                     operator = operators.pop();
                     while (operator != '(') {
-                        result.append(operator + space);
+                        result.append(operator).append(space);
                         operator = operators.pop();
                     }
                 } else {
                     if (!operators.isEmpty()) {
                         while (priority.compare(s.charAt(i), operators.peek()) < 1)
-                            result.append(operators.pop() + space);
+                            result.append(operators.pop()).append(space);
                     }
                     operators.push(s.charAt(i));
                 }
