@@ -19,9 +19,8 @@ public class ReversePolishNotationBuilder {
                     i++;
                     if (i == s.length()) break;
                 }
-            }
-
-            if (isOperator(s.charAt(i))) {
+                i--;
+            } else if (isOperator(s.charAt(i))) {
                 Character operator;
                 if (s.charAt(i) == '(') {
                     operators.push(s.charAt(i));
