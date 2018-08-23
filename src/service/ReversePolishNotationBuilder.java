@@ -31,7 +31,6 @@ public class ReversePolishNotationBuilder {
             iterator++;
             if (iterator == inputChars.length) break;
         }
-        iterator--;
     }
 
     private void replaceOperator(char[] inputChars, ArrayDeque<Character> operators,
