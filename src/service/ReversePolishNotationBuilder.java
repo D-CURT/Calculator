@@ -6,26 +6,27 @@ import java.util.ArrayDeque;
 
 public class ReversePolishNotationBuilder {
 
-    public String getRPN(String s) {
+    public String getRPN(String input) {
         ArrayDeque<Character> operators = new ArrayDeque<>();
+        char[] s = input.toCharArray();
         String space = " ";
         StringBuilder result = new StringBuilder();
 
 
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length; i++) {
 
-            if (Character.isDigit(s.charAt(i))) {
-                while (!isOperator(s.charAt(i))) {
-                    result.append(s.charAt(i)).append(space);
+            if (Character.isDigit(s[i])) {
+                while (!isOperator(s[i])) {
+                    result.append(s[i]).append(space);
                     i++;
-                    if (i == s.length()) break;
+                    if (i == s.length) break;
                 }
                 i--;
-            } else if (isOperator(s.charAt(i))) {
+            } else if (isOperator(s[i])) {
                 Character operator;
-                if (s.charAt(i) == '(') {
-                    operators.push(s.charAt(i));
-                } else if (s.charAt(i) == ')') {
+                if (s[i] == '(') {
+                    operators.push(s[i]);
+                } else if (s[i] == ')') {
                     operator = operators.pop();
                     while (operator != '(') {
                         result.append(operator).append(space);
@@ -33,10 +34,10 @@ public class ReversePolishNotationBuilder {
                     }
                 } else {
                     if (!operators.isEmpty()) {
-                        while (Operator.comparePriority(s.charAt(i), operators.peek()) < 1)
+                        while (Operator.comparePriority(s[i], operators.peek()) < 1)
                             result.append(operators.pop()).append(space);
                     }
-                    operators.push(s.charAt(i));
+                    operators.push(s[i]);
                 }
             }
 

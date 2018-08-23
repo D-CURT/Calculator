@@ -21,7 +21,7 @@ public enum Operator {
 
     Operator() {
         symbol = '?';
-        priority = 5;
+        priority = 4;
     }
 
     Operator(char symbol, int priority) {
