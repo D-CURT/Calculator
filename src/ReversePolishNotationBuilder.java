@@ -32,7 +32,7 @@ public class ReversePolishNotationBuilder {
                     }
                 } else {
                     if (!operators.isEmpty()) {
-                        while (priority.compare(s.charAt(i), operators.peek()) < 1)
+                        while (Operator.comparePriority(s.charAt(i), operators.peek()) < 1)
                             result.append(operators.pop()).append(space);
                     }
                     operators.push(s.charAt(i));
@@ -41,7 +41,7 @@ public class ReversePolishNotationBuilder {
 
         }
         while (!operators.isEmpty())
-            result.append(operators.pop() + (operators.isEmpty() ? "" : space));
+            result.append(operators.pop()).append(operators.isEmpty() ? "" : space);
         return result.toString();
     }
 

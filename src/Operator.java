@@ -27,6 +27,10 @@ public enum Operator {
         return Arrays.stream(values()).filter(operator -> operator.symbol == c).findFirst().orElse(Operator.DEFAULT);
     }
 
+    public static int comparePriority(char c1, char c2) {
+        return new CharPriority().compare(c1, c2);
+    }
+
     public char getSymbol() {
         return symbol;
     }

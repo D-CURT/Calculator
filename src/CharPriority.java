@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class OperatorsPriorityComparator implements Comparator<Character> {
+public class CharPriority implements Comparator<Character> {
 
     @Override
     public int compare(Character c1, Character c2) {
