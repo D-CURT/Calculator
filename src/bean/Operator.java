@@ -1,6 +1,6 @@
 package bean;
 
-import service.support.CharPriority;
+import support.comparator.CharPriority;
 
 import java.util.Arrays;
 

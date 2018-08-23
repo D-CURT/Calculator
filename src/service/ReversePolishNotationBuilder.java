@@ -1,11 +1,11 @@
 package service;
 
 import bean.Operator;
-
 import java.util.ArrayDeque;
 
+import static support.constants.Constants.*;
+
 public class ReversePolishNotationBuilder {
-    private static final String SPACE = " ";
 
     public String getRPN(String input) {
         ArrayDeque<Character> operators = new ArrayDeque<>();
@@ -21,7 +21,7 @@ public class ReversePolishNotationBuilder {
             }
         }
         while (!operators.isEmpty())
-            result.append(operators.pop()).append(operators.isEmpty() ? "" : SPACE);
+            result.append(operators.pop()).append(operators.isEmpty() ? EMPTY : SPACE);
         return result.toString();
     }
 
@@ -49,19 +49,19 @@ public class ReversePolishNotationBuilder {
 
     private void replaceBrackets(char[] inputChars, ArrayDeque<Character> operators,
                                  StringBuilder resultString, int iterator) {
-        Character operator;
-        if (inputChars[iterator] == Operator.LEFT_BRACKET.getSymbol()) {
+        char operator;
+        if (inputChars[iterator] == LEFT_BRACKET) {
             operators.push(inputChars[iterator]);
-        } else if (inputChars[iterator] == Operator.RIGHT_BRACKET.getSymbol()) {
+        } else if (inputChars[iterator] == RIGHT_BRACKET) {
             operator = operators.pop();
-            while (operator != Operator.LEFT_BRACKET.getSymbol()) {
+            while (operator != LEFT_BRACKET) {
                 resultString.append(operator).append(SPACE);
                 operator = operators.pop();
             }
         }
     }
 
-    public boolean isOperator(Character c) {
+    public boolean isOperator(char c) {
         return "()+-*/^".indexOf(c) != -1;
     }
 
