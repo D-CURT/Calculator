@@ -20,7 +20,6 @@ public enum Operator {
     private int priority;
 
     Operator() {
-        symbol = '?';
         priority = 4;
     }
 

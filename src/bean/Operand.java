@@ -1,6 +1,6 @@
 package bean;
 
-import bean.interfaces.I_isOperand;
+import bean.interfaces.IOperandChecker;
 
 import java.util.regex.Pattern;
 
@@ -8,10 +8,10 @@ public enum Operand {
     INTEGER(Operand::isInteger),
     FRACTIONAL(Operand::isFractional);
 
-    private I_isOperand check;
+    private IOperandChecker method;
 
-    Operand(I_isOperand check) {
-        this.check = check;
+    Operand(IOperandChecker method) {
+        this.method = method;
     }
 
     public static boolean isOperand(String s) {
@@ -26,7 +26,7 @@ public enum Operand {
         return Pattern.compile("^-?\\d+\\.\\d+$").matcher(s).find();
     }
 
-    public I_isOperand getCheck() {
-        return check;
+    public IOperandChecker getMethod() {
+        return method;
     }
 }

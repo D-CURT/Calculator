@@ -1,7 +1,10 @@
 package service;
 
 import bean.Operator;
+import support.Adapter;
+
 import java.util.ArrayDeque;
+import java.util.Arrays;
 
 import static support.constants.Constants.*;
 
@@ -9,6 +12,7 @@ public class ReversePolishNotationBuilder {
 
     public String getRPN(String input) {
         ArrayDeque<Character> operators = new ArrayDeque<>();
+        Adapter.adapt(input);
         char[] s = input.toCharArray();
         StringBuilder result = new StringBuilder();
 
@@ -61,7 +65,7 @@ public class ReversePolishNotationBuilder {
     }
 
     public boolean isOperator(char c) {
-        return "()+-*/^".indexOf(c) != -1;
+        return "()+-*/%^".indexOf(c) != -1;
     }
 
 
