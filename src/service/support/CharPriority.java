@@ -1,3 +1,7 @@
+package service.support;
+
+import bean.Operator;
+
 import java.util.Comparator;
 
 public class CharPriority implements Comparator<Character> {

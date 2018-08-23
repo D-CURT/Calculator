@@ -1,13 +1,19 @@
+package bean;
+
+import service.support.CharPriority;
+
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Operator {
-    LEFT_BRACKET('(', 1),
-    RIGHT_BRACKET(')', 1),
+    LEFT_BRACKET('(', 0),
+    RIGHT_BRACKET(')', 0),
+    POW('^', 1),
     PLUS('+', 2),
     MINUS('-', 2),
     MULTIPLY('*', 3),
     DIVINE('/', 3),
+    PERCENT('%', 3),
+
     DEFAULT();
 
     private char symbol;
@@ -15,7 +21,7 @@ public enum Operator {
 
     Operator() {
         symbol = '?';
-        priority = 4;
+        priority = 5;
     }
 
     Operator(char symbol, int priority) {
@@ -24,7 +30,7 @@ public enum Operator {
     }
 
     public static Operator find(char c) {
-        return Arrays.stream(values()).filter(operator -> operator.symbol == c).findFirst().orElse(Operator.DEFAULT);
+        return Arrays.stream(values()).filter(operator -> operator.symbol == c).findFirst().orElse(DEFAULT);
     }
 
     public static int comparePriority(char c1, char c2) {
