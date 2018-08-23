@@ -6,7 +6,6 @@ public class ReversePolishNotationBuilder {
 
     public String getRPN(String s) {
         ArrayDeque<Character> operators = new ArrayDeque<>();
-        PriorityComparator priority = new PriorityComparator();
         String space = " ";
         StringBuilder result = new StringBuilder();
 
