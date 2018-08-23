@@ -37,6 +37,10 @@ public enum Operator {
         return new CharPriority().compare(c1, c2);
     }
 
+    public static boolean isBracket(char c) {
+        return c == LEFT_BRACKET.symbol || c == RIGHT_BRACKET.symbol;
+    }
+
     public char getSymbol() {
         return symbol;
     }
