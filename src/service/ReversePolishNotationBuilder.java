@@ -4,8 +4,8 @@ import bean.Operator;
 import support.Adapter;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 
+import static bean.Operator.isOperator;
 import static support.constants.Constants.*;
 
 public class ReversePolishNotationBuilder {
@@ -62,10 +62,6 @@ public class ReversePolishNotationBuilder {
                 operator = operators.pop();
             }
         }
-    }
-
-    public boolean isOperator(char c) {
-        return "()+-*/%^".indexOf(c) != -1;
     }
 
 

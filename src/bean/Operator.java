@@ -32,6 +32,10 @@ public enum Operator {
         return Arrays.stream(values()).filter(operator -> operator.symbol == c).findFirst().orElse(DEFAULT);
     }
 
+    public static boolean isOperator(char c) {
+        return find(c).symbol == c;
+    }
+
     public static int comparePriority(char c1, char c2) {
         return new CharPriority().compare(c1, c2);
     }
