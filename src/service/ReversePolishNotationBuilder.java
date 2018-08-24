@@ -1,5 +1,7 @@
 package service;
 
+import bean.Element;
+import bean.Operand;
 import bean.Operator;
 import support.Adapter;
 
@@ -16,8 +18,7 @@ public class ReversePolishNotationBuilder {
         StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < s.length; i++) {
-
-            if (Character.isDigit(s[i])) {
+            if (Operand.typeOf(s[i])) {
                 replaceOperand(s, result, i);
             } else if (Operator.typeOf(s[i])) {
                 replaceOperator(s, operators, result, i);
@@ -29,7 +30,7 @@ public class ReversePolishNotationBuilder {
     }
 
     private void replaceOperand(char[] inputChars, StringBuilder resultString, int iterator) {
-        while (!Operator.typeOf(inputChars[iterator])) {
+        while (Operand.typeOf(inputChars[iterator])) {
             resultString.append(inputChars[iterator]).append(SPACE);
             iterator++;
             if (iterator == inputChars.length) break;

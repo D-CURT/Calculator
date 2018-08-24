@@ -28,9 +28,16 @@ public enum Operator {
         this.priority = priority;
     }
 
+    public static Operator find(String s) {
+        return find(s.charAt(0));
+    }
 
     public static Operator find(char c) {
         return Arrays.stream(values()).filter(operator -> operator.symbol == c).findFirst().orElse(DEFAULT);
+    }
+
+    public static boolean typeOf(String s) {
+        return typeOf(s.charAt(0));
     }
 
     public static boolean typeOf(char c) {
