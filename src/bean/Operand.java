@@ -4,9 +4,12 @@ import bean.interfaces.IOperandChecker;
 
 import java.util.regex.Pattern;
 
+import static support.constants.Constants.FRACTIONAL_REGEX;
+import static support.constants.Constants.INTEGER_REGEX;
+
 public enum Operand {
-    INTEGER(Operand::isInteger),
-    FRACTIONAL(Operand::isFractional);
+    INTEGER(s -> Pattern.compile(INTEGER_REGEX).matcher(s).find()),
+    FRACTIONAL(s -> Pattern.compile(FRACTIONAL_REGEX).matcher(s).find());
 
     private IOperandChecker method;
 
@@ -15,15 +18,7 @@ public enum Operand {
     }
 
     public static boolean isOperand(String s) {
-        return isInteger(s) || isFractional(s);
-    }
-
-    public static boolean isInteger(String s) {
-        return Pattern.compile("^-?\\d+$").matcher(s).find();
-    }
-
-    public static boolean isFractional(String s) {
-        return Pattern.compile("^-?\\d+\\.\\d+$").matcher(s).find();
+        return INTEGER.method.check(s) || FRACTIONAL.method.check(s);
     }
 
     public IOperandChecker getMethod() {
