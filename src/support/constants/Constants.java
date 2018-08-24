@@ -2,7 +2,7 @@ package support.constants;
 
 import bean.Operand;
 import bean.Operator;
-import bean.interfaces.IOperandChecker;
+import bean.interfaces_and_abstracts.IOperandChecker;
 
 public class Constants {
     public static final String SPACE = " ";

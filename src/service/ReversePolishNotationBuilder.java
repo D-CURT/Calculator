@@ -5,7 +5,6 @@ import support.Adapter;
 
 import java.util.ArrayDeque;
 
-import static bean.Operator.isOperator;
 import static support.constants.Constants.*;
 
 public class ReversePolishNotationBuilder {
@@ -20,7 +19,7 @@ public class ReversePolishNotationBuilder {
 
             if (Character.isDigit(s[i])) {
                 replaceOperand(s, result, i);
-            } else if (isOperator(s[i])) {
+            } else if (Operator.typeOf(s[i])) {
                 replaceOperator(s, operators, result, i);
             }
         }
@@ -30,7 +29,7 @@ public class ReversePolishNotationBuilder {
     }
 
     private void replaceOperand(char[] inputChars, StringBuilder resultString, int iterator) {
-        while (!isOperator(inputChars[iterator])) {
+        while (!Operator.typeOf(inputChars[iterator])) {
             resultString.append(inputChars[iterator]).append(SPACE);
             iterator++;
             if (iterator == inputChars.length) break;
@@ -63,6 +62,4 @@ public class ReversePolishNotationBuilder {
             }
         }
     }
-
-
 }

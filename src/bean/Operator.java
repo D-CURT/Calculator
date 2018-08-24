@@ -28,11 +28,12 @@ public enum Operator {
         this.priority = priority;
     }
 
+
     public static Operator find(char c) {
         return Arrays.stream(values()).filter(operator -> operator.symbol == c).findFirst().orElse(DEFAULT);
     }
 
-    public static boolean isOperator(char c) {
+    public static boolean typeOf(char c) {
         return find(c).symbol == c;
     }
 
