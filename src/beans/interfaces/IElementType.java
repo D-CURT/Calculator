@@ -1,6 +1,6 @@
-package bean.interfaces;
+package beans.interfaces;
 
 @FunctionalInterface
 public interface IElementType {
-   boolean typeOf(String s);
+   boolean found(String s);
 }

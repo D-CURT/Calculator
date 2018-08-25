@@ -1,10 +1,6 @@
 package support;
 
 
-import bean.Operator;
-
-import java.util.ArrayDeque;
-
 import static support.constants.Constants.*;
 
 public class Adapter {

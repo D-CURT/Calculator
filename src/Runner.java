@@ -1,10 +1,6 @@
-import bean.Element;
-import bean.Operator;
 import services.ReversePolishNotationBuilder;
-import support.constants.Constants;
 
-import static bean.Operator.isBracket;
-import static bean.Operator.isOperator;
+import java.util.StringTokenizer;
 
 public class Runner {
     public static void main(String[] args) {

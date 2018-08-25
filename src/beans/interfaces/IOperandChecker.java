@@ -1,4 +1,4 @@
-package bean.interfaces;
+package beans.interfaces;
 
 @FunctionalInterface
 public interface IOperandChecker {

@@ -1,14 +1,10 @@
 package services;
 
-import bean.Operator;
-import bean.Test;
+import beans.Operator;
 import support.Adapter;
 
 import java.util.ArrayDeque;
 
-import static bean.Operand.isOperand;
-import static bean.Operator.isBracket;
-import static bean.Operator.isOperator;
 import static support.constants.Constants.*;
 
 public class ReversePolishNotationBuilder {
@@ -16,16 +12,15 @@ public class ReversePolishNotationBuilder {
     public String getRPN(String input) {
         ArrayDeque<String> operators = new ArrayDeque<>();
         Adapter.adapt(input);
-        Test test = new Test();
         char[] s = input.toCharArray();
         StringBuilder result = new StringBuilder();
         StringBuilder current = new StringBuilder();
 
         for (int i = 0; i < s.length; i++) {
-            current.append(test.readElement(s, i, test.getType(s[i])));
-            if (isOperand(current)) {
+            current.append(ELEMENT.readElement(s, i, ELEMENT.getType(s[i])));
+            if (OPERAND.found(current)) {
                 result.append(current).append(SPACE);
-            } else if (isOperator(current)) {
+            } else if (OPERATOR.found(current)) {
                 replaceOperator(current, operators, result);
             }
             current.setLength(0);
@@ -37,7 +32,7 @@ public class ReversePolishNotationBuilder {
 
     private void replaceOperator(StringBuilder current, ArrayDeque<String> operators,
                                  StringBuilder result) {
-        if (isBracket(current)) {
+        if (OPERATOR.isBracket(current)) {
             replaceBrackets(current, operators, result);
         } else {
             if (!operators.isEmpty()) {
