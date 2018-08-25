@@ -1,47 +1,47 @@
 package bean;
 
-import support.comparator.CharPriority;
+import support.comparators.CharPriority;
 
 import java.util.Arrays;
 
 public enum Operator {
-    LEFT_BRACKET('(', 0),
-    RIGHT_BRACKET(')', 0),
-    POW('^', 1),
-    PLUS('+', 2),
-    MINUS('-', 2),
-    MULTIPLY('*', 3),
-    DIVINE('/', 3),
-    PERCENT('%', 3),
+    LEFT_BRACKET("(", 0),
+    RIGHT_BRACKET(")", 0),
+    POW("^", 1),
+    PLUS("+", 2),
+    MINUS("-", 2),
+    MULTIPLY("*", 3),
+    DIVINE("/", 3),
+    PERCENT("%", 3),
 
     DEFAULT();
 
-    private char symbol;
+    private String symbol;
     private int priority;
 
     Operator() {
         priority = 4;
     }
 
-    Operator(char symbol, int priority) {
+    Operator(String symbol, int priority) {
         this.symbol = symbol;
         this.priority = priority;
     }
 
-    public static Operator find(String s) {
-        return find(s.charAt(0));
-    }
-
     public static Operator find(char c) {
-        return Arrays.stream(values()).filter(operator -> operator.symbol == c).findFirst().orElse(DEFAULT);
+        return find(String.valueOf(c));
     }
 
-    public static boolean typeOf(String s) {
-        return typeOf(s.charAt(0));
+    public static Operator find(String s) {
+        return Arrays.stream(values()).filter(operator -> operator.symbol.equals(s)).findFirst().orElse(DEFAULT);
     }
 
     public static boolean typeOf(char c) {
-        return find(c).symbol == c;
+        return typeOf(String.valueOf(c));
+    }
+
+    public static boolean typeOf(String s) {
+        return find(s).symbol.equals(s);
     }
 
     public static int comparePriority(char c1, char c2) {
@@ -49,10 +49,14 @@ public enum Operator {
     }
 
     public static boolean isBracket(char c) {
-        return c == LEFT_BRACKET.symbol || c == RIGHT_BRACKET.symbol;
+        return isBracket(String.valueOf(c));
     }
 
-    public char getSymbol() {
+    public static boolean isBracket(String s) {
+        return s.equals(LEFT_BRACKET.symbol) || s.equals(RIGHT_BRACKET.symbol);
+    }
+
+    public String getSymbol() {
         return symbol;
     }
 

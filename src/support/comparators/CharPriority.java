@@ -1,4 +1,4 @@
-package support.comparator;
+package support.comparators;
 
 import bean.Operator;
 

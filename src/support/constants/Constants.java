@@ -2,7 +2,7 @@ package support.constants;
 
 import bean.Operand;
 import bean.Operator;
-import bean.interfaces_and_abstracts.IOperandChecker;
+import bean.interfaces.IOperandChecker;
 
 public class Constants {
     public static final String SPACE = " ";
@@ -10,8 +10,8 @@ public class Constants {
     public static final String COMMA = ",";
     public static final String POINT = ".";
 
-    public static final char LEFT_BRACKET = Operator.LEFT_BRACKET.getSymbol();
-    public static final char RIGHT_BRACKET = Operator.RIGHT_BRACKET.getSymbol();
+    public static final char LEFT_BRACKET = Operator.LEFT_BRACKET.getSymbol().charAt(0);
+    public static final char RIGHT_BRACKET = Operator.RIGHT_BRACKET.getSymbol().charAt(0);
 
     public static final String INTEGER_REGEX = "^-?\\d+$";
     public static final String FRACTIONAL_REGEX = "^-?\\d+\\.\\d+$";

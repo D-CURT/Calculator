@@ -1,21 +1,19 @@
 package bean;
 
-import bean.interfaces_and_abstracts.IElement;
+import bean.interfaces.IElementType;
 
 import java.util.Arrays;
 
 import static support.constants.Constants.POINT;
 import static support.constants.Constants.SPACE;
 
-public enum  Element {
-    OPERAND(Operand.class ,Operand::typeOf),
-    OPERATOR(Operator.class ,Operator::typeOf);
+public enum Element {
+    OPERAND(Operand::typeOf),
+    OPERATOR(Operator::typeOf);
 
-    private Class<?> type;
-    private IElement method;
+    private IElementType method;
 
-    Element(Class<?> type,IElement method) {
-        this.type = type;
+    Element(IElementType method) {
         this.method = method;
     }
 
@@ -34,9 +32,14 @@ public enum  Element {
     }
 
     public static Class<?> getType(String s) {
-        return (Operator.find(s).getSymbol() == s.charAt(0)) ? Operator.class :
+        return (Operator.find(s).getSymbol().equals(s)) ? Operator.class :
                (Operand.find(s).getMethod() != null) ? Operand.class : POINT.equals(s) ? Operand.class : null;
     }
+
+    public static Element find(char c) {
+        return find(String.valueOf(c));
+    }
+
 
     public static Element find(String s) {
         return Arrays.stream(values()).filter(element ->
