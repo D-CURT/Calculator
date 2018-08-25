@@ -55,10 +55,6 @@ public class Operator extends AbstractElement {
         return getElement(s).symbol.equals(s);
     }
 
-    public static int comparePriority(StringBuilder sb1, StringBuilder sb2) {
-        return comparePriority(sb1.toString(), sb2.toString());
-    }
-
     public static int comparePriority(String s1, String s2) {
         return new CharPriority().compare(s1, s2);
     }
