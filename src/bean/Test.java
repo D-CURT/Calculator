@@ -26,8 +26,8 @@ public class Test {
         StringBuilder element = new StringBuilder();
         while (getType(chars[iterator]) == o) {
             element.append(chars[iterator]);
-            if (iterator != chars.length && o != Operator.class) iterator++;
-            else break;
+            iterator++;
+            if (o == Operator.class || iterator == chars.length) break;
         }
         return element.toString();
     }
