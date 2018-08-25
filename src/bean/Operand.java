@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import static support.constants.Constants.FRACTIONAL_REGEX;
 import static support.constants.Constants.INTEGER_REGEX;
 
-//Нужно доработать структуру перечисления...
 public enum Operand {
     INTEGER(s -> Pattern.compile(INTEGER_REGEX).matcher(s).find()),
     FRACTIONAL(s -> Pattern.compile(FRACTIONAL_REGEX).matcher(s).find()),
@@ -29,11 +28,11 @@ public enum Operand {
                 INTEGER.method.check(s) || FRACTIONAL.method.check(s)).findFirst().orElse(DEFAULT);
     }
 
-    public static boolean typeOf(char c) {
-        return typeOf(String.valueOf(c));
+    public static boolean isOperand(StringBuilder sb) {
+        return isOperand(sb.toString());
     }
 
-    public static boolean typeOf(String s) {
+    public static boolean isOperand(String s) {
         return find(s).method != null;
     }
 
