@@ -1,6 +1,5 @@
 package services;
 
-import bean.Element;
 import bean.Operator;
 import bean.Test;
 import support.Adapter;
@@ -23,7 +22,7 @@ public class ReversePolishNotationBuilder {
         StringBuilder current = new StringBuilder();
 
         for (int i = 0; i < s.length; i++) {
-            current.append(test.readElement(s, i, Element.getType(s[i])));
+            current.append(test.readElement(s, i, test.getType(s[i])));
             if (isOperand(current)) {
                 result.append(current).append(SPACE);
             } else if (isOperator(current)) {

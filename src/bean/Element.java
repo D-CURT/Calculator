@@ -7,7 +7,7 @@ import java.util.Arrays;
 import static support.constants.Constants.POINT;
 
 public enum Element {
-    OPERAND(Operand::isOperand),
+   /* OPERAND(Operand::isOperand),
     OPERATOR(Operator::isOperator);
 
     private final IElementType method;
@@ -56,5 +56,5 @@ public enum Element {
 
     public IElementType getMethod() {
         return method;
-    }
+    }*/
 }

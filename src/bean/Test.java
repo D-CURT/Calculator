@@ -7,7 +7,7 @@ import java.util.Arrays;
 import static support.constants.Constants.POINT;
 
 public class Test {
-   public enum Element {
+    public enum Element {
         OPERAND(Operand::isOperand),
         OPERATOR(Operator::isOperator);
 
@@ -43,13 +43,6 @@ public class Test {
                 : POINT.equals(s) ? Operand.class : null;
     }
 
-    public Test.Element find(StringBuilder sb) {
-        return find(sb.toString());
-    }
-
-    public boolean isElement(char c) {
-        return isElement(String.valueOf(c));
-    }
     public boolean isElement(String s) {
         return find(s).method != null;
     }
