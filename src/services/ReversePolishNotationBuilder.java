@@ -2,6 +2,7 @@ package services;
 
 import bean.Element;
 import bean.Operator;
+import bean.Test;
 import support.Adapter;
 
 import java.util.ArrayDeque;
@@ -16,12 +17,13 @@ public class ReversePolishNotationBuilder {
     public String getRPN(String input) {
         ArrayDeque<String> operators = new ArrayDeque<>();
         Adapter.adapt(input);
+        Test test = new Test();
         char[] s = input.toCharArray();
         StringBuilder result = new StringBuilder();
         StringBuilder current = new StringBuilder();
 
         for (int i = 0; i < s.length; i++) {
-            current.append(Element.readElement(s, i, Element.getType(s[i])));
+            current.append(test.readElement(s, i, Element.getType(s[i])));
             if (isOperand(current)) {
                 result.append(current).append(SPACE);
             } else if (isOperator(current)) {
@@ -43,7 +45,6 @@ public class ReversePolishNotationBuilder {
                 while (Operator.comparePriority(current.toString(), operators.peek()) < 1) {
                     result.append(operators.pop()).append(SPACE);
                 }
-
             }
             operators.push(current.toString());
         }
