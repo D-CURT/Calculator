@@ -13,8 +13,8 @@ public class Adapter {
     private static String adaptPow(String input) {
         StringBuilder result = new StringBuilder();
         StringBuilder current = new StringBuilder();
-        String after_brack_num;
-        int i_input_brack = 0, i_res_brack = 0;
+        String num_after_brack;
+        int i_input_brack = 0;
         char[] s = input.toCharArray();
         ArrayDeque<String> operators = new ArrayDeque<>();
 
@@ -28,10 +28,11 @@ public class Adapter {
                 if (!operators.isEmpty() && !operators.peek().equals(current.toString())
                         && operators.peek().equals(POW)) {
                     while (!operators.isEmpty() && operators.peek().equals(POW)) {
-                        after_brack_num = ELEMENT.readElement(s, i_input_brack + 2, ELEMENT.getType(s[i_input_brack + 2]));
+
+                        num_after_brack = ELEMENT.readElement(s, i_input_brack + 2, ELEMENT.getType(s[i_input_brack + 2]));
                         int res_lng = result.length() - 1, i_brack = result.lastIndexOf(LEFT_BRACKET);
 
-                        if (i_brack == res_lng - after_brack_num.length() - current.length()) result.deleteCharAt(i_brack);
+                        if (i_brack == res_lng - num_after_brack.length() - current.length()) result.deleteCharAt(i_brack);
                         else result.insert(result.length() - 1, RIGHT_BRACKET);
                         operators.pop();
                     }
