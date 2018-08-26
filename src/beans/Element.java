@@ -1,7 +1,7 @@
 package beans;
 
 import beans.abstractions.AbstractElement;
-import beans.interfaces.IElementType;
+import beans.interfaces.FIElement_found;
 import support.constants.Constants;
 
 import java.util.Arrays;
@@ -15,13 +15,13 @@ public class Element extends AbstractElement {
         OPERAND(Constants.OPERAND::found),
         OPERATOR(Constants.OPERATOR::found);
 
-        private final IElementType method;
+        private final FIElement_found method;
 
-        Content(IElementType method) {
+        Content(FIElement_found method) {
             this.method = method;
         }
 
-        public IElementType getMethod() {
+        public FIElement_found getMethod() {
             return method;
         }
     }

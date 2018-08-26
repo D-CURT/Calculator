@@ -1,6 +1,6 @@
 package beans.interfaces;
 
 @FunctionalInterface
-public interface IOperandChecker {
+public interface FIOperand_check {
     boolean check(String s);
 }

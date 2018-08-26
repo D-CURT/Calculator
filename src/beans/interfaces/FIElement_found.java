@@ -1,6 +1,6 @@
 package beans.interfaces;
 
 @FunctionalInterface
-public interface IElementType {
+public interface FIElement_found {
    boolean found(String s);
 }
