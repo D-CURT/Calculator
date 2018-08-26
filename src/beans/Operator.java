@@ -7,14 +7,14 @@ import java.util.Arrays;
 
 public class Operator extends AbstractElement {
     public enum Content {
-        LEFT_BRACKET("(", 0),
-        RIGHT_BRACKET(")", 0),
-        POW("^", 1),
+        LEFT_BRACKET("(", 1),
+        RIGHT_BRACKET(")", 1),
         PLUS("+", 2),
         MINUS("-", 2),
         MULTIPLY("*", 3),
         DIVINE("/", 3),
         PERCENT("%", 3),
+        POW("^", 4),
 
         DEFAULT();
 
@@ -23,7 +23,7 @@ public class Operator extends AbstractElement {
 
         Content() {
             symbol = "";
-            priority = 4;
+            priority = 0;
         }
 
         Content(String symbol, int priority) {

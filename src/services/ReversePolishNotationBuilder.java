@@ -11,8 +11,7 @@ public class ReversePolishNotationBuilder {
 
     public String getRPN(String input) {
         ArrayDeque<String> operators = new ArrayDeque<>();
-        Adapter.adapt(input);
-        char[] s = input.toCharArray();
+        char[] s = Adapter.adapt(input).toCharArray();
         StringBuilder result = new StringBuilder();
         StringBuilder current = new StringBuilder();
 

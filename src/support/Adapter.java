@@ -1,42 +1,40 @@
 package support;
 
 
+import java.util.ArrayDeque;
+
 import static support.constants.Constants.*;
 
 public class Adapter {
-    public static void adapt(String s) {
-        s = s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY);
+    public static String adapt(String s) {
+        return adaptPow(s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY));
     }
 
-    /*private void adaptPow(String input) {
-        StringBuilder sb = new StringBuilder();
+    private static String adaptPow(String input) {
+        StringBuilder result = new StringBuilder();
+        StringBuilder current = new StringBuilder();
         char[] s = input.toCharArray();
-        ArrayDeque<Character> operatorStack = new ArrayDeque<>();
+        ArrayDeque<String> operators = new ArrayDeque<>();
 
         for (int i = 0; i < s.length; i++) {
-            if (Operator.find(s[i])) {
-                sb.append(tokenList.get(i));
-                if (tokenList.get(i).equals("^")) sb.append("(");
-                if (operatorStack.size() > 1 && !operatorStack.peek().equals(tokenList.get(i))
-                        && operatorStack.peek().equals("^")) {
-                    while (!operatorStack.empty() && operatorStack.peek().equals("^")) {
-                        sb.insert(sb.length() - 1, ")");
-                        operatorStack.pop();
-                    }
-                    operatorStack.push(tokenList.get(i));
-                } else {
-                    operatorStack.push(tokenList.get(i));
-                }
-            } else {
-                sb.append(tokenList.get(i));
-                if (!operatorStack.empty() && i == tokenList.size() - 1 && operatorStack.peek().equals("^")) {
-                    while (!operatorStack.empty() && operatorStack.peek().equals("^")) {
-                        sb.append(")");
-                        operatorStack.pop();
+            result.append(current.append(ELEMENT.readElement(s, i, ELEMENT.getType(s[i]))));
+            if (OPERATOR.found(current)) {
+                if (current.toString().equals(POW)) result.append(LEFT_BRACKET);
+                if (!operators.isEmpty() && !operators.peek().equals(current.toString())
+                        && operators.peek().equals(POW)) {
+                    while (!operators.isEmpty() && operators.peek().equals(POW)) {
+                        result.insert(result.length() - 1, RIGHT_BRACKET);
+                        operators.pop();
                     }
                 }
+                operators.push(current.toString());
             }
+            current.setLength(0);
         }
-        input = sb.toString();
-    }*/
+        while (!operators.isEmpty() && operators.peek().equals(POW)) {
+            result.append(")");
+            operators.pop();
+        }
+        return result.toString();
+    }
 }
