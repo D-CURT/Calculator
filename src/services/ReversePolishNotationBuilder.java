@@ -20,6 +20,7 @@ public class ReversePolishNotationBuilder {
             if (OPERAND.found(current)) {
                 result.append(current).append(SPACE);
             } else if (OPERATOR.found(current)) {
+
                 replaceOperator(current, operators, result);
             }
             current.setLength(0);

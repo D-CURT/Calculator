@@ -18,6 +18,7 @@ public class Constants {
     public static final String LEFT_BRACKET = Operator.Content.LEFT_BRACKET.getSymbol();
     public static final String RIGHT_BRACKET = Operator.Content.RIGHT_BRACKET.getSymbol();
     public static final String POW = Operator.Content.POW.getSymbol();
+    public static final String MINUS = Operator.Content.MINUS.getSymbol();
 
     public static final String INTEGER_REGEX = "^-?\\d+$";
     public static final String FRACTIONAL_REGEX = "^-?\\d+\\.\\d+$";
