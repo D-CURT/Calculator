@@ -5,8 +5,6 @@ import support.comparators.CharPriority;
 
 import java.util.Arrays;
 
-import static support.constants.Constants.MINUS;
-
 public class Operator extends AbstractElement {
     public enum Content {
         LEFT_BRACKET("(", 1),
