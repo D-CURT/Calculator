@@ -3,8 +3,6 @@ package support;
 
 import beans.interfaces.FI_Adapter_onPosition;
 
-import java.util.ArrayDeque;
-
 import static support.constants.Constants.*;
 
 public class Adapter {
