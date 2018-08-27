@@ -50,7 +50,7 @@ public class Adapter {
                         result.append(tmp).append(current);
                         tmp.setLength(0);
                         current.setLength(0);
-                        lb = false;
+                        lb = false; rb = false;
                     } else {
                         if (i == a.length - 1) {
                             result.append(tmp.deleteCharAt(lb_i))
