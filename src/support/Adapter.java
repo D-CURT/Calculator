@@ -17,7 +17,6 @@ public class Adapter {
     private static String adaptPow(String input) {
         if (input.contains(POW)) {
             char[] a = input.toCharArray();
-            ArrayDeque<Object> operators = new ArrayDeque<>();
             StringBuilder current = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
             StringBuilder result = new StringBuilder();
@@ -31,7 +30,6 @@ public class Adapter {
                         if (NUMBER.in(a[i + 1]) || LETTER.in(a[i + 1])) {
                             tmp.append(current).append(LEFT_BRACKET);
                             lb_i = tmp.lastIndexOf(LEFT_BRACKET);
-                            operators.push(current);
                             current.setLength(0);
                         }
                         if (!lb) lb = true;
