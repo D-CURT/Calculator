@@ -2,7 +2,7 @@ package beans.interfaces;
 
 import java.util.Enumeration;
 
-public interface IElement {
+public interface I_Element {
     Enum getElement(String s);
 
     boolean found(String s);

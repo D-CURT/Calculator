@@ -1,7 +1,7 @@
 package beans;
 
 import beans.abstractions.AbstractElement;
-import beans.interfaces.FIOperand_check;
+import beans.interfaces.FI_Operand_check;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -16,16 +16,16 @@ public class Operand extends AbstractElement {
 
         DEFAULT();
 
-        private FIOperand_check method;
+        private FI_Operand_check method;
 
         Content() {
         }
 
-        Content(FIOperand_check method) {
+        Content(FI_Operand_check method) {
             this.method = method;
         }
 
-        public FIOperand_check getMethod() {
+        public FI_Operand_check getMethod() {
             return method;
         }
     }

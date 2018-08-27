@@ -3,7 +3,7 @@ package support.constants;
 import beans.Element;
 import beans.Operand;
 import beans.Operator;
-import beans.interfaces.FIOperand_check;
+import beans.interfaces.FI_Operand_check;
 
 public class Constants {
     public static final Element ELEMENT = new Element();
@@ -23,7 +23,7 @@ public class Constants {
     public static final String INTEGER_REGEX = "^-?\\d+$";
     public static final String FRACTIONAL_REGEX = "^-?\\d+\\.\\d+$";
 
-    public static final FIOperand_check INTEGER = Operand.Content.INTEGER.getMethod();
-    public static final FIOperand_check FRACTIONAL = Operand.Content.FRACTIONAL.getMethod();
+    public static final FI_Operand_check INTEGER = Operand.Content.INTEGER.getMethod();
+    public static final FI_Operand_check FRACTIONAL = Operand.Content.FRACTIONAL.getMethod();
 
 }

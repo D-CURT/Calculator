@@ -1,8 +1,8 @@
 package beans.abstractions;
 
-import beans.interfaces.IElement;
+import beans.interfaces.I_Element;
 
-public abstract class AbstractElement implements IElement {
+public abstract class AbstractElement implements I_Element {
     @Override
     public Enum<?> getElement(String s) {
         return null;
