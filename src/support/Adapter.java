@@ -33,8 +33,9 @@ public class Adapter {
                             num_after_brack = ELEMENT.readElement(s, i_input_brack + 2, ELEMENT.getType(s[i_input_brack + 2]));
                             int res_lng = result.length() - 1, i_brack = result.lastIndexOf(LEFT_BRACKET);
 
-                            if (i_brack == res_lng - num_after_brack.length() - current.length()) result.deleteCharAt(i_brack);
-                            else result.insert(result.length() - 1, RIGHT_BRACKET);
+                            if (i_brack == res_lng - num_after_brack.length() - current.length()) {
+                                result.deleteCharAt(i_brack);
+                            } else result.insert(result.length() - 1, RIGHT_BRACKET);
                             operators.pop();
                         }
                     }
