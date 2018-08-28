@@ -13,13 +13,14 @@ public class Adapter {
     }
 
     private static String adaptPow(String input) {
+        StringBuilder result = new StringBuilder();
         if (input.contains(POW)) {
             char[] a = input.toCharArray();
             StringBuilder current = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
-            StringBuilder result = new StringBuilder();
+
             boolean lb = false, rb = false;
-            int lb_i = 0;
+            int lb_i = 0, lb_c = 0;
 
             for (int i = 0; i < a.length; i++) {
                 current.append(ELEMENT.readElement(a, i, ELEMENT.getType(a[i])));
@@ -31,6 +32,7 @@ public class Adapter {
                             current.setLength(0);
                         }
                         if (!lb) lb = true;
+                        lb_c++;
                     }
                 } else if (lb) {
                     if (OPERATOR.found(current)) {
@@ -38,11 +40,21 @@ public class Adapter {
                             if (i != a.length - 1) {
                                 if (NUMBER.in(a[i + 1]) || LETTER.in(a[i + 1])) {
                                     tmp.append(RIGHT_BRACKET);
+                                    lb_c--;
                                     rb = true;
                                 }
                             }
                         }
-                        if (rb) tmp.deleteCharAt(lb_i);
+                        if (rb) {
+                            tmp.deleteCharAt(lb_i);
+                            lb_c--;
+                        }
+                        while (lb_c > 0) {
+                            tmp.append(RIGHT_BRACKET);
+                            lb_c--;
+                        }
+
+
                         result.append(tmp).append(current);
                         tmp.setLength(0);
                         current.setLength(0);
@@ -63,6 +75,6 @@ public class Adapter {
                 }
             }
         }
-        return input;
+        return result.toString();
     }
 }
