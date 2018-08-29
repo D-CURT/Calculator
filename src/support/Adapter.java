@@ -15,7 +15,7 @@ public class Adapter {
         return adaptPow(s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY));
     }
 
-    /*private static String adaptPow(String input) {
+    private static String adaptPow(String input) {
         StringBuilder result = new StringBuilder();
         if (input.contains(POW)) {
             char[] a = input.toCharArray();
@@ -23,7 +23,7 @@ public class Adapter {
             StringBuilder tmp = new StringBuilder();
 
             boolean lb = false, rb = false, lb_r = false, rb_r = true;
-            int lb_i = 0, lb_c = 0, b_r_c = 0;
+            int lb_i = 0, lb_c = 0;
 
             for (int i = 0; i < a.length; i++) {
                 current.append(ELEMENT.readElement(a, i, ELEMENT.getType(a[i])));
@@ -55,8 +55,10 @@ public class Adapter {
 
                                         }
                                         if (!rb && BRACKET.in(a[i + 1])) {
-                                            tmp.deleteCharAt(lb_i);
-                                            lb_c--;
+                                            if (lb_i > -1) {
+                                                tmp.deleteCharAt(lb_i);
+                                                lb_c--;
+                                            }
                                         }
                                     }
                                     while (lb_c > 0) {
@@ -73,14 +75,22 @@ public class Adapter {
                                 lb_r = true; rb_r = false;
                             }
                             if (current.toString().equals(RIGHT_BRACKET)) {
-                                if (lb && lb_i == 1)  {
-                                    tmp.deleteCharAt(lb_i);
-                                    lb_c--;
+                                if (rb_r)  {
+                                    if (lb_i > -1 && lb_i < tmp.length()) {
+                                        tmp.deleteCharAt(lb_i);
+                                        lb_c--;
+                                    }
+                                    while (lb_c > 0) {
+                                        tmp.append(RIGHT_BRACKET);
+                                        lb_c--;
+                                    }
                                 }
+                                result.append(tmp).append(current);
+                                tmp.setLength(0);
                                 rb_r = true; lb_r = false;
                             }
                         }
-                        if (!rb && lb) {
+                        if (!rb && lb && !rb_r) {
                             tmp.append(current);
                         }
                         if (rb) rb = false;
@@ -91,61 +101,20 @@ public class Adapter {
                                     .append(current).append(RIGHT_BRACKET);
                             return result.toString();
                         } else  {
-                            tmp.append(current);
+                            if (BRACKET.in(a[i + 1])) {
+                                tmp.deleteCharAt(lb_i);
+                                lb_c--;
+                                result.append(tmp).append(current);
+                                tmp.setLength(0);
+                            } else {
+                                tmp.append(current);
+                            }
                             current.setLength(0);
                         }
                     }
                 } else {
                     result.append(current);
                     current.setLength(0);
-                }
-            }
-        }
-        return result.toString();
-    }*/
-
-    private static String adaptPow(String expression) {
-        char[] a = expression.toCharArray();
-        final int END = a.length - 1;
-        StringBuilder tmp = new StringBuilder();
-        String current;
-        StringBuilder result = new StringBuilder();
-        ArrayDeque<String> pows = new ArrayDeque<>();
-        boolean lb = false;
-
-        for (int i = 0; i < a.length; i++) {
-            current = ELEMENT.readElement(a, i, ELEMENT.getType(a[i]));
-            if (OPERATOR.found(current)) {
-                if (i != END) {
-                    if (current.equals(POW)) {
-                        if (NUMBER.in(a[i + 1]) || LETTER.in(a[i + 1])) {
-                            //tmp.append(current).append(LEFT_BRACKET);
-                            lb = true;
-                        }
-
-                        pows.push(current);
-                    }
-                }
-                result.append(lb ? current + LEFT_BRACKET : current);
-                //if (tmp.length() > 0) tmp.setLength(0);
-                if (pows.size() > 1) {
-                    while (!pows.isEmpty()) {
-                        result.append(RIGHT_BRACKET);
-                        pows.pop();
-                    }
-                    lb = false;
-                }
-            } else {
-                if (i != END && POW.equals(String.valueOf(a[i + 1]))) {
-                    /*if ()*/
-                }
-                result.append(current);
-                if (pows.size() > 1) {
-                    while (!pows.isEmpty()) {
-                        tmp.append(RIGHT_BRACKET);
-                        pows.pop();
-                    }
-                    lb = false;
                 }
             }
         }
