@@ -1,6 +1,7 @@
 import services.ReversePolishNotationBuilder;
 import support.Adapter;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class Runner {

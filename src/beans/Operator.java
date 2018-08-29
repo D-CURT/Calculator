@@ -42,8 +42,10 @@ public class Operator extends AbstractElement {
 
     @Override
     public Content getElement(String s) {
-        return Arrays.stream(Content.values()).filter(Content -> Content.symbol != null && Content.symbol.equals(s)).
-                findFirst().orElse(Content.DEFAULT);
+        return Arrays.stream(Content.values())
+                     .filter(Content -> Content.symbol != null && Content.symbol.equals(s))
+                     .findFirst()
+                     .orElse(Content.DEFAULT);
     }
 
     public boolean found(StringBuilder sb) {

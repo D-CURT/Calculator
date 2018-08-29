@@ -32,8 +32,10 @@ public class Operand extends AbstractElement {
 
     @Override
     public Content getElement(String s) {
-        return Arrays.stream(Content.values()).filter(operand ->
-                Content.INTEGER.method.check(s) || Content.FRACTIONAL.method.check(s)).findFirst().orElse(Content.DEFAULT);
+        return Arrays.stream(Content.values())
+                     .filter(operand -> Content.INTEGER.method.check(s) || Content.FRACTIONAL.method.check(s))
+                     .findFirst()
+                     .orElse(Content.DEFAULT);
     }
 
     public boolean found(StringBuilder sb) {
