@@ -1,6 +1,6 @@
 package beans.abstractions;
 
-import beans.interfaces.I_Element;
+import interfaces.I_Element;
 
 public abstract class AbstractElement implements I_Element {
     @Override

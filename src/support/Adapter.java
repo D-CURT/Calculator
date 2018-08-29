@@ -1,21 +1,65 @@
 package support;
 
-
-import beans.interfaces.FI_Adapter_onPosition;
-
-import java.util.ArrayDeque;
-
 import static support.constants.Constants.*;
 
 public class Adapter {
-    public static final FI_Adapter_onPosition NUMBER = Character::isDigit;
-    public static final FI_Adapter_onPosition LETTER = Character::isAlphabetic;
-    public static final FI_Adapter_onPosition BRACKET = (c) -> c == '(';
     public static String adapt(String s) {
         return adaptPow(s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY));
     }
 
-    private static String adaptPow(String input) {
+    private static String adaptPow(String s) {
+
+        StringBuilder result = new StringBuilder();
+        if (s.contains(POW)) {
+            String current;
+            char[] a = s.toCharArray();
+            final int END = a.length - 1;
+            int lb_c = 0;
+            boolean lb = false;
+
+
+            for (int i = 0; i < a.length; i++) {
+                current = ELEMENT.readElement(a, i, ELEMENT.getType(a[i]));
+
+                if (OPERATOR.found(current)) {
+                    if (i != END) {
+                        if (current.equals(POW)) {
+                            if (NUMBER.in(a[i + 1]) || LETTER.in(a[i + 1])) {
+                                result.append(current).append(LEFT_BRACKET);
+                                lb_c++;
+                                lb = true;
+                            }
+                        } else if (lb) {
+                            while (lb_c > 0) {
+                                result.append(RIGHT_BRACKET);
+                                lb_c--;
+                            }
+                            lb = false;
+                            result.append(current);
+                        }
+                    } else {
+                        result.append(current);
+                        if (lb) {
+                            while (lb_c > 0) {
+                                result.append(RIGHT_BRACKET);
+                                lb_c--;
+                            }
+                        }
+                    }
+                } else {
+                    result.append(current);
+                    if (lb_c > 1) {
+                        while (lb_c > 0) {
+                            result.append(RIGHT_BRACKET);
+                            lb_c--;
+                        }
+                    }
+                }
+            }
+        }
+        return result.toString();
+    }
+    /*private static String adaptPow(String input) {
         StringBuilder result = new StringBuilder();
         if (input.contains(POW)) {
             char[] a = input.toCharArray();
@@ -119,5 +163,5 @@ public class Adapter {
             }
         }
         return result.toString();
-    }
+    }*/
 }

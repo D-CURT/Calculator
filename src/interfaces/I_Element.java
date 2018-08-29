@@ -1,6 +1,4 @@
-package beans.interfaces;
-
-import java.util.Enumeration;
+package interfaces;
 
 public interface I_Element {
     Enum getElement(String s);

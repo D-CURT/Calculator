@@ -1,7 +1,7 @@
 package beans;
 
 import beans.abstractions.AbstractElement;
-import beans.interfaces.FI_Element_found;
+import interfaces.FI_Element_found;
 import support.constants.Constants;
 
 import java.util.Arrays;

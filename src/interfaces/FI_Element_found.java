@@ -1,4 +1,4 @@
-package beans.interfaces;
+package interfaces;
 
 @FunctionalInterface
 public interface FI_Element_found {
