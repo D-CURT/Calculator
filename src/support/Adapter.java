@@ -47,68 +47,57 @@ public class Adapter {
     }*/
 
     private static String setPowPriority(String input) {
-        StringBuilder result = new StringBuilder();
         if (input.contains(POW)) {
             char[] a = input.toCharArray();
-            StringBuilder current = new StringBuilder();
+            String current;
+            StringBuilder result = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
 
-            boolean lb = false, rb = false, lb_r = false, rb_r = true;
-            int lb_i = 0, lb_c = 0;
+            boolean lb = false, close = false, lb_r = false, rb_r = true;
+            int lb_c = 0;
 
             for (int i = 0; i < a.length; i++) {
-                current.append(ELEMENT.readElement(a, i, ELEMENT.getType(a[i])));
-                if (current.toString().equals(POW)) {
+                current = ELEMENT.readElement(a, i, ELEMENT.getType(a[i]));
+                if (current.equals(POW)) {
                     if (a[i] != a.length - 1) {
                         if (NUMBER.in(a[i + 1]) || LETTER.in(a[i + 1])) {
                             tmp.append(current).append(LEFT_BRACKET);
-                            lb_i = tmp.lastIndexOf(LEFT_BRACKET);
-                            current.setLength(0);
                         }
                         if (!BRACKET.in(a[i + 1])) {
                             if (!lb) lb = true;
                             lb_c++;
                         } else {
                             tmp.append(current);
-                            current.setLength(0);
                         }
                     }
                 } else if (lb) {
                     if (OPERATOR.found(current)) {
                         if (!OPERATOR.isBracket(current)) {
                             if (!lb_r) {
-                                if (!current.toString().equals(POW)) {
+                                if (!current.equals(POW)) {
                                     if (i != a.length - 1) {
                                         if (!BRACKET.in(a[i + 1])) {
                                             tmp.append(RIGHT_BRACKET);
                                             lb_c--;
-                                            rb = true;
-
-                                        }
-                                        if (!rb && BRACKET.in(a[i + 1])) {
-                                            if (lb_i > -1) {
-                                                tmp.deleteCharAt(lb_i);
-                                                lb_c--;
-                                            }
+                                            close = true;
                                         }
                                     }
                                     while (lb_c > 0) {
                                         tmp.append(RIGHT_BRACKET);
                                         lb_c--;
                                     }
-                                    result.append(tmp).append(current);
-                                    tmp.setLength(0);
+
                                     lb = false;
                                 }
                             }
                         } else {
-                            if (current.toString().equals(LEFT_BRACKET)) {
+                            if (current.equals(LEFT_BRACKET)) {
                                 lb_r = true; rb_r = false;
                             }
-                            if (current.toString().equals(RIGHT_BRACKET)) {
+                            if (current.equals(RIGHT_BRACKET)) {
                                 if (rb_r)  {
-                                    if (lb_i > -1 && lb_i < tmp.length()) {
-                                        tmp.deleteCharAt(lb_i);
+                                    if (tmp.toString().contains(LEFT_BRACKET)) {
+                                        tmp.deleteCharAt(tmp.lastIndexOf(LEFT_BRACKET));
                                         lb_c--;
                                     }
                                     while (lb_c > 0) {
@@ -116,31 +105,18 @@ public class Adapter {
                                         lb_c--;
                                     }
                                 }
-                                result.append(tmp).append(current);
-                                tmp.setLength(0);
+                                close = true;
                                 rb_r = true; lb_r = false;
                             }
                         }
-                        if (!rb && lb && !rb_r) {
-                            tmp.append(current);
-                        }
-                        if (rb) rb = false;
-                        current.setLength(0);
+                        if (!close && lb && !rb_r) tmp.append(current);
                     } else {
-                        if (i == a.length - 1) {
-                            result.append(tmp.deleteCharAt(lb_i))
-                                    .append(current).append(RIGHT_BRACKET);
-                            return result.toString();
-                        } else  {
-                            if (BRACKET.in(a[i + 1])) {
-                                tmp.deleteCharAt(lb_i);
-                                lb_c--;
-                                result.append(tmp).append(current);
-                                tmp.setLength(0);
-                            } else {
-                                tmp.append(current);
-                            }
-                            current.setLength(0);
+                        if ( i != a.length - 1 && BRACKET.in(a[i + 1])) {
+                            tmp.deleteCharAt(tmp.lastIndexOf(LEFT_BRACKET));
+                            lb_c--;
+                            close = true;
+                        } else {
+                            tmp.append(current);
                         }
                     }
                 } else {
@@ -149,11 +125,16 @@ public class Adapter {
                         tmp.setLength(0);
                     }
                     result.append(current);
-                    current.setLength(0);
+                }
+                if (close) {
+                    result.append(tmp).append(current);
+                    tmp.setLength(0);
+                    close = false;
                 }
             }
+            input = result.toString();
         }
-        return result.toString();
+        return input;
     }
 
     public static String handleBrackets(String s) {
@@ -175,11 +156,11 @@ public class Adapter {
                 }
                 if (current.equals(RIGHT_BRACKET)) {
                     stop = i;
-                    tmp.subList(start + 1, stop);
+                    if (tmp != null)
+                        tmp.subList(start + 1, stop);
 
                 }
             }
-
             return result.toString();
         }
         return s;
