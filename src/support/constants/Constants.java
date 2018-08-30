@@ -7,9 +7,6 @@ import interfaces.FI_Adapter_onPosition;
 import interfaces.FI_Operand_check;
 
 public class Constants {
-    public static final FI_Adapter_onPosition NUMBER = Character::isDigit;
-    public static final FI_Adapter_onPosition LETTER = Character::isAlphabetic;
-    public static final FI_Adapter_onPosition BRACKET = (c) -> c == '(';
 
     public static final Element ELEMENT = new Element();
     public static final Operand OPERAND = new Operand();

@@ -5,6 +5,8 @@ import interfaces.FI_Element_found;
 import support.constants.Constants;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import static support.constants.Constants.OPERAND;
 import static support.constants.Constants.OPERATOR;
@@ -47,6 +49,21 @@ public class Element extends AbstractElement {
             if (o == Operator.class || iterator == chars.length) break;
         }
         return element.toString();
+    }
+
+    public List readElements(char[] chars) {
+        LinkedList<Object> list = new LinkedList<>();
+        Class<?> t;
+        for (int i = 0; i < chars.length; i++) {
+            t = getType(chars[i]);
+            list.add(readElement(chars, i, t));
+            while (getType(chars[i]) == t) {
+                i++;
+                if (t == Operator.class || i == chars.length) break;
+            }
+            i--;
+        }
+        return list;
     }
 
     public Class<?> getType(char c) {
