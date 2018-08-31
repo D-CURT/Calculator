@@ -15,10 +15,11 @@ public class ReversePolishNotationBuilder {
         List<String> result = new LinkedList<>();
         String current;
 
-        for (int i = 0; i < s.size(); i++) {
-            current = s.get(i);
+        for (String value : s) {
+            current = value;
             if (OPERAND.found(current)) {
-                result.add(current); result.add(SPACE);
+                result.add(current);
+                result.add(SPACE);
             } else if (OPERATOR.found(current)) {
                 replaceOperator(current, operators, result);
             }
