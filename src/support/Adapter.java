@@ -1,7 +1,7 @@
 package support;
 
 import java.util.LinkedList;
-import java.util.Arrays;
+import java.util.Objects;
 
 import static support.constants.Constants.*;
 
@@ -126,9 +126,8 @@ public class Adapter {
                 }
                 if (current.equals(RIGHT_BRACKET)) {
                     stop = i;
-                    if (tmp != null)
-                        tmp.subList(start + 1, stop);
-
+                    //noinspection ConstantConditions
+                    tmp.subList(start + 1, stop);
                 }
             }
             return result.toString();
