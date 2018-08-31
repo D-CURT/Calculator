@@ -3,41 +3,47 @@ package services;
 import beans.Operator;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 import java.util.List;
 
 import static support.constants.Constants.*;
 
 public class ReversePolishNotationBuilder {
 
-    public List<String> getRPN_asList(List<String> s) {
+    public String toRPN(String s) {
+        return String.valueOf(asList(s));
+    }
+
+    public List asList(String s) {
+        return ELEMENT.asElementsList(toRPN(s));
+    }
+
+    public String toRPN(List<String> s) {
         ArrayDeque<String> operators = new ArrayDeque<>();
-        List<String> result = new LinkedList<>();
+        StringBuilder result = new StringBuilder();
         String current;
 
         for (String value : s) {
             current = value;
             if (OPERAND.found(current)) {
-                result.add(current);
-                result.add(SPACE);
+                result.append(current).append(SPACE);
             } else if (OPERATOR.found(current)) {
                 replaceOperator(current, operators, result);
             }
         }
         while (!operators.isEmpty()) {
-            result.add(operators.pop()); result.add(operators.isEmpty() ? EMPTY : SPACE);
+            result.append(operators.pop()).append(operators.isEmpty() ? EMPTY : SPACE);
         }
-        return result;
+        return result.toString();
     }
 
     private void replaceOperator(String current, ArrayDeque<String> operators,
-                                 List<String> result) {
+                                 StringBuilder result) {
         if (OPERATOR.isBracket(current)) {
             replaceBrackets(current, operators, result);
         } else {
             if (!operators.isEmpty()) {
                 while (Operator.comparePriority(current, operators.peek()) < 1) {
-                    result.add(operators.pop()); result.add(SPACE);
+                    result.append(operators.pop()).append(SPACE);
                 }
             }
             operators.push(current);
@@ -45,14 +51,14 @@ public class ReversePolishNotationBuilder {
     }
 
     private void replaceBrackets(String current, ArrayDeque<String> operators,
-                                 List<String> result) {
+                                 StringBuilder result) {
         String operator;
         if (current.equals(LEFT_BRACKET)) {
             operators.push(current);
         } else if (current.equals(RIGHT_BRACKET)) {
             operator = operators.pop();
             while (!operator.equals(LEFT_BRACKET)) {
-                result.add(operator); result.add(SPACE);
+                result.append(operator).append(SPACE);
                 operator = operators.pop();
             }
         }
