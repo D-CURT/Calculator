@@ -51,17 +51,20 @@ public class Element extends AbstractElement {
         return element.toString();
     }
 
-    public List readElements(char[] chars) {
+    public List readElements(String s) {
         LinkedList<Object> list = new LinkedList<>();
-        Class<?> t;
-        for (int i = 0; i < chars.length; i++) {
-            t = getType(chars[i]);
-            list.add(readElement(chars, i, t));
-            while (getType(chars[i]) == t) {
-                i++;
-                if (t == Operator.class || i == chars.length) break;
+        if (!s.isEmpty()) {
+            Class<?> t;
+            char[] a = s.toCharArray();
+            for (int i = 0; i < a.length; i++) {
+                t = getType(a[i]);
+                list.add(readElement(a, i, t));
+                while (getType(a[i]) == t) {
+                    i++;
+                    if (t == Operator.class || i == a.length) break;
+                }
+                i--;
             }
-            i--;
         }
         return list;
     }
