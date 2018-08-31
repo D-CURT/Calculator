@@ -1,6 +1,7 @@
 package beans;
 
 import beans.abstractions.AbstractElement;
+import interfaces.FI_OperatorFunction;
 import support.comparators.CharPriority;
 
 import java.util.Arrays;
@@ -9,17 +10,18 @@ public class Operator extends AbstractElement {
     public enum Content {
         LEFT_BRACKET("(", 1),
         RIGHT_BRACKET(")", 1),
-        PLUS("+", 2),
-        MINUS("-", 2),
-        MULTIPLY("*", 3),
-        DIVINE("/", 3),
-        PERCENT("%", 3),
-        POW("^", 4),
+        PLUS("+", 2, (t1, t2) -> t1 + t2),
+        MINUS("-", 2, (t1, t2) -> t1 - t2),
+        MULTIPLY("*", 3, (t1, t2) -> t1 * t2),
+        DIVINE("/", 3, (t1, t2) -> t1 / t2),
+        PERCENT("%", 3, (t1, t2) -> (t1 * t2) / 100),
+        POW("^", 4, Math::pow),
 
         DEFAULT();
 
         private String symbol;
         private int priority;
+        private FI_OperatorFunction<Double> function;
 
         Content() {
             symbol = "";
@@ -29,6 +31,12 @@ public class Operator extends AbstractElement {
         Content(String symbol, int priority) {
             this.symbol = symbol;
             this.priority = priority;
+        }
+
+        Content(String symbol, int priority, FI_OperatorFunction<Double> function) {
+            this.symbol = symbol;
+            this.priority = priority;
+            this.function = function;
         }
 
         public String getSymbol() {
