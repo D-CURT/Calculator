@@ -1,7 +1,7 @@
 package beans;
 
 import beans.abstractions.AbstractElement;
-import interfaces.FI_OperatorFunction;
+import interfaces.FI_Operator_count;
 import support.comparators.CharPriority;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class Operator extends AbstractElement {
 
         private String symbol;
         private int priority;
-        private FI_OperatorFunction<Double> function;
+        private FI_Operator_count<Double> function;
 
         Content() {
             symbol = "";
@@ -33,7 +33,7 @@ public class Operator extends AbstractElement {
             this.priority = priority;
         }
 
-        Content(String symbol, int priority, FI_OperatorFunction<Double> function) {
+        Content(String symbol, int priority, FI_Operator_count<Double> function) {
             this.symbol = symbol;
             this.priority = priority;
             this.function = function;

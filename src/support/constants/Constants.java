@@ -1,6 +1,7 @@
 package support.constants;
 
 import beans.Element;
+import beans.Function;
 import beans.Operand;
 import beans.Operator;
 import interfaces.FI_Adapter_onPosition;
@@ -11,6 +12,7 @@ public class Constants {
     public static final Element ELEMENT = new Element();
     public static final Operand OPERAND = new Operand();
     public static final Operator OPERATOR = new Operator();
+    public static final Function FUNCTION = new Function();
 
     public static final String SPACE = " ";
     public static final String EMPTY = "";
