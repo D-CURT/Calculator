@@ -12,7 +12,7 @@ public class Adapter {
 
     private static String setPowPriority(String input) {
         if (input.contains(POW)) {
-            LinkedList<String> a = new LinkedList<>(ELEMENT.readElements(input));
+            LinkedList<String> a = new LinkedList<>(ELEMENT.asList(input));
             final int END = a.size() - 1;
             String current;
             StringBuilder result = new StringBuilder();
@@ -112,7 +112,7 @@ public class Adapter {
 
 
         if (s.contains("()")) {
-            LinkedList<String> l = new LinkedList<>(Arrays.asList(s.split("")));
+            LinkedList<String> l = new LinkedList<>(ELEMENT.asList(s));
 
             String current;
             LinkedList<String> tmp = null;

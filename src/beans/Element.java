@@ -51,7 +51,7 @@ public class Element extends AbstractElement {
         return element.toString();
     }
 
-    public List readElements(String s) {
+    public List asList(String s) {
         LinkedList<Object> list = new LinkedList<>();
         if (!s.isEmpty()) {
             Class<?> t;
