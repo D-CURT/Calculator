@@ -57,6 +57,7 @@ public class Adapter {
                                     remove = true;
                                     close = true;
                                 }
+                                if (i == END) close = true;
                                 toResult = true;
                                 rb_r = true; lb_r = false;
                             }
@@ -72,7 +73,10 @@ public class Adapter {
                             } else tmp.append(current);
                         } else {
                             remove = true;
+                            close = true;
                             toResult = true;
+                            tmp.append(current);
+                            current = "";
                         }
                     }
                 } else {

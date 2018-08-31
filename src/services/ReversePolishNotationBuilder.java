@@ -10,7 +10,7 @@ import static support.constants.Constants.*;
 public class ReversePolishNotationBuilder {
 
     public String toRPN(String s) {
-        return String.valueOf(asList(s));
+        return toRPN(ELEMENT.asElementsList(s));
     }
 
     public List asList(String s) {
@@ -20,10 +20,9 @@ public class ReversePolishNotationBuilder {
     public String toRPN(List<String> s) {
         ArrayDeque<String> operators = new ArrayDeque<>();
         StringBuilder result = new StringBuilder();
-        String current;
+        //String current;
 
-        for (String value : s) {
-            current = value;
+        for (String current : s) {
             if (OPERAND.found(current)) {
                 result.append(current).append(SPACE);
             } else if (OPERATOR.found(current)) {
