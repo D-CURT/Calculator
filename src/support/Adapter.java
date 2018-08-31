@@ -1,7 +1,6 @@
 package support;
 
 import java.util.LinkedList;
-import java.util.Objects;
 
 import static support.constants.Constants.*;
 
@@ -109,33 +108,5 @@ public class Adapter {
             input = result.toString();
         }
         return input;
-    }
-
-    public static String handleBrackets(String s) {
-        StringBuilder result = new StringBuilder();
-
-
-        if (s.contains("()")) {
-            LinkedList<String> l = new LinkedList<>(ELEMENT.asElementsList(s));
-
-            String current;
-            LinkedList<String> tmp = null;
-            int start = 0, stop = 0;
-
-            for (int i = 0; i < l.size(); i++) {
-                current = l.get(i);
-
-                if (current.equals(LEFT_BRACKET)) {
-                    start = i;
-                }
-                if (current.equals(RIGHT_BRACKET)) {
-                    stop = i;
-                    //noinspection ConstantConditions
-                    tmp.subList(start + 1, stop);
-                }
-            }
-            return result.toString();
-        }
-        return s;
     }
 }
