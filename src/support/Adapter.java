@@ -72,16 +72,18 @@ public class Adapter {
                 } else if (lb) {
                     if (OPERATOR.found(current)) {
                         if (!OPERATOR.isBracket(current)) {
-                            if (!lb_r)
+                            if (!lb_r) {
                                 if (!current.equals(POW)) {
-                                    if (i != END)
+                                    if (i != END) {
                                         if (!OPERATOR.isBracket(a.get(i + 1))) {
                                             remove = true;
                                             toResult = true;
                                         }
+                                    }
                                     close = true;
                                     lb = false;
                                 }
+                            }
                         } else {
                             if (current.equals(LEFT_BRACKET)) {
                                 lb_r = true; rb_r = false;
@@ -103,9 +105,7 @@ public class Adapter {
                                     remove = true;
                                 }
                                 toResult = true;
-                            } else {
-                                tmp.append(current);
-                            }
+                            } else tmp.append(current);
                         } else {
                             remove = true;
                             toResult = true;
