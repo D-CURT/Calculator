@@ -12,4 +12,5 @@ public class Runner {
                 + "\nAdapted: " + sa
                 + "\nReversed: " + sr);
     }
+    //
 }
