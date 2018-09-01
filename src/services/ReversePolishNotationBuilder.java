@@ -12,6 +12,7 @@ public class ReversePolishNotationBuilder {
         return toRPN(ELEMENT.asElementsList(s));
     }
 
+    /*Uncomment the method, when it will be need to use*/
     /*public List asList(String s) {
         return ELEMENT.asElementsList(toRPN(s));
     }*/

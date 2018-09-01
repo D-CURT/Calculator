@@ -23,6 +23,7 @@ public class Element extends AbstractElement {
             this.method = method;
         }
 
+        /*Uncomment the method, when it will be need to use*/
         /*public FI_Element_found getMethod() {
             return method;
         }*/
@@ -41,9 +42,9 @@ public class Element extends AbstractElement {
         return getElement(s).method != null;
     }
 
-    /*public String readElement(char[] chars, int iterator) {
-        return readElement(chars, iterator, getType(chars[iterator]));
-    }*/
+    private String readElement(char[] chars, int iterator) {
+        return chars != null ? readElement(chars, iterator, getType(chars[iterator])) : null;
+    }
 
     private String readElement(char[] chars, int iterator, Class<?> o) {
         StringBuilder element = new StringBuilder();
@@ -62,7 +63,7 @@ public class Element extends AbstractElement {
             char[] a = s.toCharArray();
             for (int i = 0; i < a.length; i++) {
                 t = getType(a[i]);
-                list.add(readElement(a, i, t));
+                list.add(readElement(a, i));
                 while (getType(a[i]) == t) {
                     i++;
                     if (t == Operator.class || i == a.length) break;
