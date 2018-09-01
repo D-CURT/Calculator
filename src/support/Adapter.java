@@ -5,11 +5,37 @@ import java.util.LinkedList;
 import static support.constants.Constants.*;
 
 public class Adapter {
-    public static String adapt(String s) {
-        return setPowPriority(s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY));
+    public String adapt(String s) {
+        return ADAPTER.setPowPriority(s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY));
     }
 
-    private static String setPowPriority(String input) {
+    public String adaptFunctions(String s) {
+        LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(s));
+        System.out.println(a);
+        final int END = a.size() - 1;
+        String current;
+        StringBuilder result = new StringBuilder();
+
+        boolean lb = false;
+
+        for (int i = 0; i < a.size(); i++) {
+            current = a.get(i);
+            if (FUNCTION.found(current)) {
+                if (i != END && !a.get(i + 1).equals(LEFT_BRACKET)) {
+                    result.append(current).append(LEFT_BRACKET);
+                    lb = true;
+                }
+            } else if (lb) {
+                if (OPERAND.found(current)) {
+                    result.append(current).append(RIGHT_BRACKET);
+                    lb = false;
+                }
+            }
+        }
+        return result.toString();
+    }
+
+    private String setPowPriority(String input) {
         if (input.contains(POW)) {
             LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(input));
             final int END = a.size() - 1;

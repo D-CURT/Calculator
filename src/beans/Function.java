@@ -7,9 +7,9 @@ import java.util.Arrays;
 
 public class Function extends AbstractElement {
     public enum Content {
-        SIN("sin", Math::sin),
-        COS("cos", Math::cos),
-        TG("tan", Math::tan),
+        SIN("sin", n -> Math.sin(Math.toRadians(n))),
+        COS("cos", n -> Math.cos(Math.toRadians(n))),
+        TG("tan", n -> Math.tan(Math.toRadians(n))),
         SQRT("sqrt", Math::sqrt),
 
         DEFAULT();
@@ -18,6 +18,7 @@ public class Function extends AbstractElement {
         private FI_Function_count<Double> function;
 
         Content() {
+            value = "";
         }
 
         Content(String value, FI_Function_count<Double> function) {

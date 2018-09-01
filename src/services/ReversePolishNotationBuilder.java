@@ -2,8 +2,7 @@ package services;
 
 import beans.Operator;
 
-import java.util.ArrayDeque;
-import java.util.List;
+import java.util.*;
 
 import static support.constants.Constants.*;
 
@@ -20,19 +19,36 @@ public class ReversePolishNotationBuilder {
     public String toRPN(List<String> s) {
         ArrayDeque<String> operators = new ArrayDeque<>();
         StringBuilder result = new StringBuilder();
-        //String current;
+        String current;
 
-        for (String current : s) {
+        for (int i = 0; i < s.size(); i++) {
+            current = s.get(i);
             if (OPERAND.found(current)) {
                 result.append(current).append(SPACE);
             } else if (OPERATOR.found(current)) {
                 replaceOperator(current, operators, result);
+            } else if (FUNCTION.found(current)) {
+                replaceFunction(s, i, result);
             }
         }
         while (!operators.isEmpty()) {
             result.append(operators.pop()).append(operators.isEmpty() ? EMPTY : SPACE);
         }
         return result.toString();
+    }
+
+    private void replaceFunction(List<String> l, int i,
+                                 StringBuilder result) {
+        String current = l.get(i);
+        String next = l.get(i + 1);
+        if (OPERAND.found(next)) {
+            l.remove(i + 1);
+        } else {
+            next = l.get(i + 2);
+            for (int j = i; j < i + 4; j++) l.remove(i);
+        }
+        System.out.println(l);
+        result.append(next).append(SPACE).append(current).append(SPACE);
     }
 
     private void replaceOperator(String current, ArrayDeque<String> operators,
@@ -60,6 +76,8 @@ public class ReversePolishNotationBuilder {
                 result.append(operator).append(SPACE);
                 operator = operators.pop();
             }
+            if (!operators.isEmpty() && FUNCTION.found(operators.peek()))
+                result.append(operators.pop()).append(SPACE);
         }
     }
 }
