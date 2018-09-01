@@ -12,7 +12,7 @@ public class Adapter {
         return s;
     }
 
-    public String adaptFunctions(String s) {
+    private String adaptFunctions(String s) {
         LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(s));
         final int END = a.size() - 1;
         String current;

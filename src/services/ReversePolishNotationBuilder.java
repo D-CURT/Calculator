@@ -12,11 +12,11 @@ public class ReversePolishNotationBuilder {
         return toRPN(ELEMENT.asElementsList(s));
     }
 
-    public List asList(String s) {
+    /*public List asList(String s) {
         return ELEMENT.asElementsList(toRPN(s));
-    }
+    }*/
 
-    public String toRPN(List<String> s) {
+    private String toRPN(List<String> s) {
         ArrayDeque<String> operators = new ArrayDeque<>();
         StringBuilder result = new StringBuilder();
 

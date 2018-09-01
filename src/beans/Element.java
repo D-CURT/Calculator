@@ -23,9 +23,9 @@ public class Element extends AbstractElement {
             this.method = method;
         }
 
-        public FI_Element_found getMethod() {
+        /*public FI_Element_found getMethod() {
             return method;
-        }
+        }*/
     }
 
     @Override
@@ -41,7 +41,11 @@ public class Element extends AbstractElement {
         return getElement(s).method != null;
     }
 
-    public String readElement(char[] chars, int iterator, Class<?> o) {
+    /*public String readElement(char[] chars, int iterator) {
+        return readElement(chars, iterator, getType(chars[iterator]));
+    }*/
+
+    private String readElement(char[] chars, int iterator, Class<?> o) {
         StringBuilder element = new StringBuilder();
         while (getType(chars[iterator]) == o) {
             element.append(chars[iterator]);
@@ -69,11 +73,11 @@ public class Element extends AbstractElement {
         return list;
     }
 
-    public Class<?> getType(char c) {
+    private Class<?> getType(char c) {
         return getType(String.valueOf(c));
     }
 
-    public Class<?> getType(String s) {
+    private Class<?> getType(String s) {
         return (OPERATOR.getElement(s).getSymbol().equals(s)) ? Operator.class
                 : (OPERAND.getElement(s).getMethod() != null) ? Operand.class
                 : POINT.equals(s) ? Operand.class : null;
