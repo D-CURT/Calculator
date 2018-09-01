@@ -6,7 +6,10 @@ import static support.constants.Constants.*;
 
 public class Adapter {
     public String adapt(String s) {
-        return ADAPTER.setPowPriority(s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY));
+        s = s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY);
+        s = ADAPTER.adaptFunctions(s);
+        s = ADAPTER.setPowPriority(s);
+        return s;
     }
 
     public String adaptFunctions(String s) {
@@ -55,7 +58,7 @@ public class Adapter {
                 current = a.get(i);
                 if (current.equals(POW)) {
                     if (i != END) {
-                        if (OPERAND.found(a.get(i + 1)))
+                        if (OPERAND.found(a.get(i + 1)) || FUNCTION.found(a.get(i + 1)))
                             tmp.append(current).append(LEFT_BRACKET);
                         if (!OPERATOR.isBracket(a.get(i + 1))) {
                             if (!lb) lb = true;
@@ -119,6 +122,7 @@ public class Adapter {
                     if (tmp.lastIndexOf(LEFT_BRACKET) != -1) {
                         tmp.deleteCharAt(tmp.lastIndexOf(LEFT_BRACKET));
                         lb_c--;
+                        if (lb_c == 0) lb = false;
                     }
                     remove = false;
                 }

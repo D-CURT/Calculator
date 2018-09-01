@@ -19,10 +19,8 @@ public class ReversePolishNotationBuilder {
     public String toRPN(List<String> s) {
         ArrayDeque<String> operators = new ArrayDeque<>();
         StringBuilder result = new StringBuilder();
-        String current;
 
-        for (int i = 0; i < s.size(); i++) {
-            current = s.get(i);
+        for (String current : s) {
             if (OPERAND.found(current)) {
                 result.append(current).append(SPACE);
             } else if (OPERATOR.found(current)) {
