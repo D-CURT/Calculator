@@ -28,7 +28,7 @@ public class ReversePolishNotationBuilder {
             } else if (OPERATOR.found(current)) {
                 replaceOperator(current, operators, result);
             } else if (FUNCTION.found(current)) {
-                replaceFunction(s, i, result);
+                replaceFunction(current, operators);
             }
         }
         while (!operators.isEmpty()) {
@@ -37,18 +37,8 @@ public class ReversePolishNotationBuilder {
         return result.toString();
     }
 
-    private void replaceFunction(List<String> l, int i,
-                                 StringBuilder result) {
-        String current = l.get(i);
-        String next = l.get(i + 1);
-        if (OPERAND.found(next)) {
-            l.remove(i + 1);
-        } else {
-            next = l.get(i + 2);
-            for (int j = i; j < i + 4; j++) l.remove(i);
-        }
-        System.out.println(l);
-        result.append(next).append(SPACE).append(current).append(SPACE);
+    private void replaceFunction(String current, ArrayDeque<String> operators) {
+        operators.push(current);
     }
 
     private void replaceOperator(String current, ArrayDeque<String> operators,

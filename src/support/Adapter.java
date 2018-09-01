@@ -11,26 +11,30 @@ public class Adapter {
 
     public String adaptFunctions(String s) {
         LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(s));
-        System.out.println(a);
         final int END = a.size() - 1;
         String current;
         StringBuilder result = new StringBuilder();
 
-        boolean lb = false;
+        boolean lb = false, rb = false;
 
         for (int i = 0; i < a.size(); i++) {
             current = a.get(i);
             if (FUNCTION.found(current)) {
                 if (i != END && !a.get(i + 1).equals(LEFT_BRACKET)) {
-                    result.append(current).append(LEFT_BRACKET);
                     lb = true;
                 }
             } else if (lb) {
                 if (OPERAND.found(current)) {
-                    result.append(current).append(RIGHT_BRACKET);
+                    rb = true;
                     lb = false;
                 }
             }
+            if (lb) result.append(current).append(LEFT_BRACKET);
+            else if (rb) {
+                result.append(current).append(RIGHT_BRACKET);
+                rb = false;
+            }
+            else result.append(current);
         }
         return result.toString();
     }
