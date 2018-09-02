@@ -48,13 +48,16 @@ public class Function extends AbstractElement {
         return getElement(s).value.equals(s);
     }
 
-    public boolean setUnaryMinus(String current, List<String> list, int i) {
-        if (current.equals(MINUS)) {
-            current = (list.size() != 1 && i == 0 && OPERAND.found(list.get(i + 1)))
-                    || (i != list.size() - 1 && i != 0 && list.get(i - 1).equals(LEFT_BRACKET) && OPERAND.found(list.get(i + 1)))
-                    || (i != list.size() - 1 && i != 0 && OPERATOR.found(list.get(i - 1)) && !list.get(i - 1).equals(RIGHT_BRACKET)
-                    && (OPERAND.found(list.get(i + 1)) || list.get(i + 1).equals(LEFT_BRACKET))) ? UNARY_MINUS : current;
-        }
-        return current.equals(UNARY_MINUS);
+    public void setUnaryMinus(List<String> list, int i) {
+        String current = list.get(i);
+        if (current.equals(MINUS))
+            list.set(i, isUnaryMinus(list, i) ? UNARY_MINUS : current);
+    }
+
+    public boolean isUnaryMinus(List<String> list, int i) {
+        return (list.size() != 1 && i == 0 && OPERAND.found(list.get(i + 1)))
+                || (i != list.size() - 1 && i != 0 && list.get(i - 1).equals(LEFT_BRACKET) && OPERAND.found(list.get(i + 1)))
+                || (i != list.size() - 1 && i != 0 && OPERATOR.found(list.get(i - 1)) && !list.get(i - 1).equals(RIGHT_BRACKET)
+                && (OPERAND.found(list.get(i + 1)) || list.get(i + 1).equals(LEFT_BRACKET)));
     }
 }
