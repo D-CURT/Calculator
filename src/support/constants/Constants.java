@@ -4,7 +4,7 @@ import beans.Element;
 import beans.Function;
 import beans.Operand;
 import beans.Operator;
-import support.Adapter;
+import support.adapters.Adapter;
 
 public class Constants {
 
