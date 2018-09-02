@@ -17,6 +17,8 @@ class PowAdapter {
         if (s.contains(POW)) {
             LinkedList<String> list = new LinkedList<>(ELEMENT.asElementsList(s));
             final int END = list.size() - 1;
+
+
             
             String current;
             StringBuilder result = new StringBuilder();
@@ -38,6 +40,16 @@ class PowAdapter {
     }
 
     private void open(LinkedList<String> list, int i, StringBuilder result) {
+        String current = list.get(i);
+        String next = list.get(i + 1);
+        if (OPERAND.found(next) || FUNCTION.found(next))
+            result.append(current).append(OPENED);
+        if (next.equals(LEFT_BRACKET))
+            result.append(current);
+        else {
+            count++;
+            if (!opened) opened = true;
+        }
     }
 
     String setPowPriority(String input) {
