@@ -8,6 +8,7 @@ import static support.constants.Constants.RIGHT_BRACKET;
 class PowAdapter {
     private static final String OPENED = "<";
     private static final String CLOSED = ">";
+    private int end;
     private int count;
     private boolean bracket_UP = false;
     private boolean bracket_DOWN = true;
@@ -16,7 +17,7 @@ class PowAdapter {
     String setPriority(String s) {
         if (s.contains(POW)) {
             LinkedList<String> list = new LinkedList<>(ELEMENT.asElementsList(s));
-            final int END = list.size() - 1;
+            end = list.size() - 1;
 
 
             
@@ -26,11 +27,13 @@ class PowAdapter {
             for (int i = 0; i < list.size(); i++) {
                 current = list.get(i);
                 if (OPERATOR.found(current)) {
-                    if (opened) {
-
+                    if (current.equals(POW)) {
+                        open(list, i, result);
                     } else {
-                        if (current.equals(POW) && i != END) {
-                            open(list, i, result);
+                        if (opened) {
+
+                        } else {
+
                         }
                     }
                 }
@@ -40,15 +43,17 @@ class PowAdapter {
     }
 
     private void open(LinkedList<String> list, int i, StringBuilder result) {
-        String current = list.get(i);
-        String next = list.get(i + 1);
-        if (OPERAND.found(next) || FUNCTION.found(next))
-            result.append(current).append(OPENED);
-        if (next.equals(LEFT_BRACKET))
-            result.append(current);
-        else {
-            count++;
-            if (!opened) opened = true;
+        if (i != end) {
+            String current = list.get(i);
+            String next = list.get(i + 1);
+            if (OPERAND.found(next) || FUNCTION.found(next))
+                result.append(current).append(OPENED);
+            if (next.equals(LEFT_BRACKET))
+                result.append(current);
+            else {
+                count++;
+                if (!opened) opened = true;
+            }
         }
     }
 
@@ -56,12 +61,12 @@ class PowAdapter {
         if (input.contains(POW)) {
             /*
              * Открытие приоритета:
-             * 1. Тек. эл. '^'; НЕ конец строки; След. эл. цифра или функция.
+             * 1. Тек. эл. '^'; НЕ конец строки; След. эл. цифра или функция. !
              *   Увеличение счетчика:
-             *   1.1 След. эл. НЕ скобка.
+             *   1.1 След. эл. НЕ скобка. !
              *
              * Заполнение временной строки:
-             * 1. НЕ конец строки; Тек. эл. '^'; След. эл. скобка.
+             * 1. НЕ конец строки; Тек. эл. '^'; След. эл. скобка. !
              * 2. Тек. эл. оператор; Приоритет открыт; (флаг) Приоритет НЕ закрывается; (флаг) Скобка НЕ открыта.
              * 3. Тек. эл. НЕ оператор; Приоритет открыт; След. эл. НЕ скобка.
              *
