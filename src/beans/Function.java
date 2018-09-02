@@ -48,12 +48,12 @@ public class Function extends AbstractElement {
         return getElement(s).value.equals(s);
     }
 
-    public boolean isUnaryMinus(String current, List<String> list, int i) {
+    public boolean setUnaryMinus(String current, List<String> list, int i) {
         if (current.equals(MINUS)) {
             current = (list.size() != 1 && i == 0 && OPERAND.found(list.get(i + 1)))
                     || (i != list.size() - 1 && i != 0 && list.get(i - 1).equals(LEFT_BRACKET) && OPERAND.found(list.get(i + 1)))
                     || (i != list.size() - 1 && i != 0 && OPERATOR.found(list.get(i - 1)) && !list.get(i - 1).equals(RIGHT_BRACKET)
-                    && (OPERAND.found(list.get(i + 1)) || list.get(i + 1).equals(RIGHT_BRACKET))) ? UNARY_MINUS : current;
+                    && (OPERAND.found(list.get(i + 1)) || list.get(i + 1).equals(LEFT_BRACKET))) ? UNARY_MINUS : current;
         }
         return current.equals(UNARY_MINUS);
     }
