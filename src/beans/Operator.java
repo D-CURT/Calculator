@@ -68,22 +68,4 @@ public class Operator extends AbstractElement {
     public boolean isBracket(String s) {
         return s.equals(Content.LEFT_BRACKET.symbol) || s.equals(Content.RIGHT_BRACKET.symbol);
     }
-
-   /* public boolean isUnaryMinus(String s, char[] chars, int i) {
-        if (s.equals(MINUS)) {
-
-            if (tokenList.size() != 1 && i == 0 && isOperand(tokenList.get(i + 1))) {
-                if (tokenList.get(i).equals("-")) tokenList.set(i, "!");
-                flag = true;
-            } else if (i != tokenList.size() - 1 && i != 0 && tokenList.get(i - 1).equals("(") && isOperand(tokenList.get(i + 1))) {
-                if (tokenList.get(i).equals("-")) tokenList.set(i, "!");
-                flag = true;
-            } else if (i != tokenList.size() - 1 && i != 0 && isOperator(tokenList.get(i - 1)) && isOperand(tokenList.get(i + 1))) {
-                if (tokenList.get(i).equals("-")) tokenList.set(i, "!");
-                flag = true;
-            } else if (i != tokenList.size() - 1 && i != 0 && !tokenList.get(i).equals("-") && tokenList.get(i + 1).equals("(")) flag = true;
-            if (!flag && !tokenList.get(i).equals("-")) tokenList.set(i, "?");
-
-        }
-    }*/
 }
