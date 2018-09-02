@@ -1,7 +1,6 @@
 import services.ReversePolishNotationBuilder;
 
 import static support.constants.Constants.ADAPTER;
-import static support.constants.Constants.ELEMENT;
 
 public class Runner {
     public static void main(String[] args) {

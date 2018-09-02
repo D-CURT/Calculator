@@ -45,23 +45,29 @@ public class Adapter {
     private String setPowPriority(String input) {
         if (input.contains(POW)) {
             /*
-            * Открытие скобки:
-            * 1. Тек. эл. '^'; Не конец строки; След. эл. цифра или функция.
+            * Открытие приоритета:
+            * 1. Тек. эл. '^'; НЕ конец строки; След. эл. цифра или функция.
             *   Увеличение счетчика:
-            *   1.1 След. эл. не '('
-            *   Иначе:
-            *   1.2 Добавляем тек. эл. во врем. строку.
-            * Иначе:
-            * 2. Добавляем тек. эл. в результат.
-            *   Добавляем временную строку в результат:
-            *   2.1 Временная строка не пуста.
-            *   Очищаем временную строку.
-            * Закрытие скобки:
+            *   1.1 След. эл. НЕ скобка.
             *
+            * Заполнение временной строки:
+            * 1. НЕ конец строки; Тек. эл. '^'; След. эл. скобка.
+            * 2. Приоритет открыт; Тек. эл. оператор; (флаг) Приоритет НЕ закрывается; (флаг) Скобка НЕ открыта.
+            * 3. Тек. эл. НЕ оператор; След. эл. НЕ скобка.
+            *
+            * Удаление приоритета из временной строки:
+            * 1. Открытый приоритет есть во врем. строке.
+            *   Уменьшение счетчика:
+            *   1.1 Приоритет удален.
+            * 2. Тек. эл. оператор; НЕ '^'; НЕ скобка; (флаг) Результ. скобка НЕ открыта; НЕ конец строки; След. эл. НЕ скобка.
+            * 3. Тек. эл. ')'; (флаг) Скобка закрыта.
+            * 4. Тек. эл. оператор; Конец строки.
             *
             * */
             LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(input));
             final int END = a.size() - 1;
+            final String OPEN = "<";
+            final String CLOSE = ">";
             String current;
             StringBuilder result = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
@@ -75,7 +81,7 @@ public class Adapter {
                 if (current.equals(POW)) {
                     if (i != END) {
                         if (OPERAND.found(a.get(i + 1)) || FUNCTION.found(a.get(i + 1)))
-                            tmp.append(current).append(LEFT_BRACKET);
+                            tmp.append(current).append(OPEN);
                         if (!OPERATOR.isBracket(a.get(i + 1))) {
                             if (!lb) lb = true;
                             lb_c++;
@@ -114,7 +120,7 @@ public class Adapter {
                     } else {
                         if (i != END) {
                             if (OPERATOR.isBracket(a.get(i + 1))) {
-                                if (tmp.lastIndexOf(LEFT_BRACKET) == tmp.length() - 1) {
+                                if (tmp.lastIndexOf(OPEN) == tmp.length() - 1) {
                                     remove = true;
                                 }
                                 toResult = true;
@@ -135,8 +141,8 @@ public class Adapter {
                     result.append(current);
                 }
                 if (remove) {
-                    if (tmp.lastIndexOf(LEFT_BRACKET) != -1) {
-                        tmp.deleteCharAt(tmp.lastIndexOf(LEFT_BRACKET));
+                    if (tmp.lastIndexOf(OPEN) != -1) {
+                        tmp.deleteCharAt(tmp.lastIndexOf(OPEN));
                         lb_c--;
                         if (lb_c == 0) lb = false;
                     }
@@ -144,7 +150,7 @@ public class Adapter {
                 }
                 if (close) {
                     while (lb_c > 0) {
-                        tmp.append(RIGHT_BRACKET);
+                        tmp.append(CLOSE);
                         lb_c--;
                     }
                     close = false;
@@ -156,6 +162,7 @@ public class Adapter {
                 }
             }
             input = result.toString();
+            input = input.replaceAll(OPEN, LEFT_BRACKET).replaceAll(CLOSE, RIGHT_BRACKET);
         }
         return input;
     }
