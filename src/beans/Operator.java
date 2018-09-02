@@ -56,10 +56,6 @@ public class Operator extends AbstractElement {
                      .orElse(Content.DEFAULT);
     }
 
-    public boolean found(StringBuilder sb) {
-        return found(sb.toString());
-    }
-
     @Override
     public boolean found(String s) {
         return getElement(s).symbol.equals(s);
@@ -67,10 +63,6 @@ public class Operator extends AbstractElement {
 
     public static int comparePriority(String s1, String s2) {
         return new CharPriority().compare(s1, s2);
-    }
-
-    public boolean isBracket(StringBuilder sb) {
-        return isBracket(sb.toString());
     }
 
     public boolean isBracket(String s) {
