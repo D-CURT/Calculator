@@ -6,6 +6,39 @@ import static support.constants.Constants.*;
 import static support.constants.Constants.RIGHT_BRACKET;
 
 class PowAdapter {
+    private static final String OPENED = "<";
+    private static final String CLOSED = ">";
+    private int count;
+    private boolean bracket_UP = false;
+    private boolean bracket_DOWN = true;
+    private boolean opened = false;
+
+    String setPriority(String s) {
+        if (s.contains(POW)) {
+            LinkedList<String> list = new LinkedList<>(ELEMENT.asElementsList(s));
+            final int END = list.size() - 1;
+            
+            String current;
+            StringBuilder result = new StringBuilder();
+
+            for (int i = 0; i < list.size(); i++) {
+                current = list.get(i);
+                if (OPERATOR.found(current)) {
+                    if (opened) {
+
+                    } else {
+                        if (current.equals(POW) && i != END) {
+                            open(list, i, result);
+                        }
+                    }
+                }
+            }
+        }
+        return s;
+    }
+
+    private void open(LinkedList<String> list, int i, StringBuilder result) {
+    }
 
     String setPowPriority(String input) {
         if (input.contains(POW)) {
@@ -47,8 +80,6 @@ class PowAdapter {
              * */
             LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(input));
             final int END = a.size() - 1;
-            final String OPEN = "<";
-            final String CLOSE = ">";
             String current;
             StringBuilder result = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
@@ -62,7 +93,7 @@ class PowAdapter {
                 if (current.equals(POW)) {
                     if (i != END) {
                         if (OPERAND.found(a.get(i + 1)) || FUNCTION.found(a.get(i + 1)))
-                            tmp.append(current).append(OPEN);
+                            tmp.append(current).append(OPENED);
                         if (!OPERATOR.isBracket(a.get(i + 1))) {
                             if (!lb) lb = true;
                             lb_c++;
@@ -101,7 +132,7 @@ class PowAdapter {
                     } else {
                         if (i != END) {
                             if (OPERATOR.isBracket(a.get(i + 1))) {
-                                if (tmp.lastIndexOf(OPEN) == tmp.length() - 1) {
+                                if (tmp.lastIndexOf(OPENED) == tmp.length() - 1) {
                                     remove = true;
                                 }
                                 toResult = true;
@@ -122,8 +153,8 @@ class PowAdapter {
                     result.append(current);
                 }
                 if (remove) {
-                    if (tmp.lastIndexOf(OPEN) != -1) {
-                        tmp.deleteCharAt(tmp.lastIndexOf(OPEN));
+                    if (tmp.lastIndexOf(OPENED) != -1) {
+                        tmp.deleteCharAt(tmp.lastIndexOf(OPENED));
                         lb_c--;
                         if (lb_c == 0) lb = false;
                     }
@@ -131,7 +162,7 @@ class PowAdapter {
                 }
                 if (close) {
                     while (lb_c > 0) {
-                        tmp.append(CLOSE);
+                        tmp.append(CLOSED);
                         lb_c--;
                     }
                     close = false;
@@ -143,7 +174,7 @@ class PowAdapter {
                 }
             }
             input = result.toString();
-            input = input.replaceAll(OPEN, LEFT_BRACKET).replaceAll(CLOSE, RIGHT_BRACKET);
+            input = input.replaceAll(OPENED, LEFT_BRACKET).replaceAll(CLOSED, RIGHT_BRACKET);
         }
         return input;
     }
