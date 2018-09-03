@@ -12,7 +12,7 @@ public class Function extends AbstractElement {
     public enum Content {
         SIN("sin", n -> Math.sin(Math.toRadians(n))),
         COS("cos", n -> Math.cos(Math.toRadians(n))),
-        TG("tan", n -> Math.tan(Math.toRadians(n))),
+        TAN("tan", n -> Math.tan(Math.toRadians(n))),
         SQRT("sqrt", Math::sqrt),
         UNARY_MINUS("um", n -> n = -n),
 

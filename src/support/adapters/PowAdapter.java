@@ -1,7 +1,6 @@
 package support.adapters;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import static support.constants.Constants.*;
 import static support.constants.Constants.RIGHT_BRACKET;
