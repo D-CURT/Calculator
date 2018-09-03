@@ -7,7 +7,6 @@ import beans.Operator;
 import support.adapters.Adapter;
 
 public class Constants {
-
     public static final Adapter ADAPTER = new Adapter();
 
     public static final Element ELEMENT = new Element();
