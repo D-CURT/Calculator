@@ -39,7 +39,7 @@ public abstract class AbstractCalculator implements I_MultipleCalculator {
                 } else result = Double.parseDouble(element);
                 numbers.push(result);
             }
-            if (numbers.size() > 1) throw new CalculatorException("The number of numbers is not agreed.");
+            if (numbers.size() > 1) throw new CalculatorException("The number of operands is not agreed.");
         } catch (CalculatorException e) {
             return new Result(expression, e.getMessage());
         }
