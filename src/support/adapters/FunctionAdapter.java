@@ -40,10 +40,12 @@ class FunctionAdapter {
         return result.toString();
     }
 
-    List<String> replaceUnaryMinus(List<String> list) {
+    String replaceUnaryMinus(List<String> list) {
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             FUNCTION.setUnaryMinus(list, i);
+            builder.append(list.get(i));
         }
-        return list;
+        return builder.toString();
     }
 }

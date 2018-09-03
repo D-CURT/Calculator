@@ -14,7 +14,7 @@ public class Function extends AbstractElement {
         COS("cos", n -> Math.cos(Math.toRadians(n))),
         TG("tan", n -> Math.tan(Math.toRadians(n))),
         SQRT("sqrt", Math::sqrt),
-        UNARY_MINUS("-u", n -> n = -n),
+        UNARY_MINUS("um", n -> n = -n),
 
         DEFAULT();
 
@@ -50,18 +50,16 @@ public class Function extends AbstractElement {
 
     public void setUnaryMinus(List<String> list, int i) {
         if (list != null) {
-            if (i >= 0 && i < list.size()) {
-                String current = list.get(i);
-                if (current.equals(MINUS))
-                    list.set(i, isUnaryMinus(list, i) ? UNARY_MINUS : current);
-            }
+            String current = list.get(i);
+            if (current.equals(MINUS))
+                list.set(i, isUnaryMinus(list, i) ? UNARY_MINUS : current);
         }
     }
 
-    public boolean isUnaryMinus(List<String> list, int i) {
+    private boolean isUnaryMinus(List<String> list, int i) {
         return (list.size() != 1 && i == 0 && OPERAND.found(list.get(i + 1)))
                 || (i != list.size() - 1 && i != 0 && list.get(i - 1).equals(LEFT_BRACKET) && OPERAND.found(list.get(i + 1)))
-                || (i != list.size() - 1 && i != 0 && OPERATOR.found(list.get(i - 1)) && !list.get(i - 1).equals(RIGHT_BRACKET)
-                && (OPERAND.found(list.get(i + 1)) || list.get(i + 1).equals(LEFT_BRACKET)));
+                || (i != list.size() - 1 && i != 0 && (OPERATOR.found(list.get(i - 1)) )) && !list.get(i - 1).equals(RIGHT_BRACKET)
+                && (OPERAND.found(list.get(i + 1)) || list.get(i + 1).equals(LEFT_BRACKET));
     }
 }

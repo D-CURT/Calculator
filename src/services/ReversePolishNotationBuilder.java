@@ -33,6 +33,7 @@ public class ReversePolishNotationBuilder {
         while (!operators.isEmpty()) {
             result.append(operators.pop()).append(operators.isEmpty() ? EMPTY : SPACE);
         }
+
         return result.toString();
     }
 
