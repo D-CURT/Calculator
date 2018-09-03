@@ -1,6 +1,6 @@
 package beans.elements;
 
-import beans.abstractions.AbstractElement;
+import abstractions.AbstractElement;
 import interfaces.FI_Function_count;
 
 import java.util.Arrays;

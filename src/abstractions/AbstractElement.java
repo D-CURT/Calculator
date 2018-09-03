@@ -1,4 +1,4 @@
-package beans.abstractions;
+package abstractions;
 
 import interfaces.I_Element;
 

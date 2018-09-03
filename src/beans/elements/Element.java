@@ -1,6 +1,6 @@
 package beans.elements;
 
-import beans.abstractions.AbstractElement;
+import abstractions.AbstractElement;
 import interfaces.FI_Element_found;
 import support.constants.Constants;
 

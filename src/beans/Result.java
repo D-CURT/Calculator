@@ -12,12 +12,12 @@ public class Result {
     public Result() {
     }
 
-    Result(String expression, Double result) {
+    public Result(String expression, Double result) {
         this.expression = expression;
         this.result = result;
     }
 
-    Result(String expression, String error) {
+    public Result(String expression, String error) {
         this.expression = expression;
         this.error = error;
     }
