@@ -1,6 +1,6 @@
 package support.comparators;
 
-import beans.Operator;
+import beans.elements.Operator;
 
 import java.util.Comparator;
 

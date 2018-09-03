@@ -1,9 +1,9 @@
 package support.constants;
 
-import beans.Element;
-import beans.Function;
-import beans.Operand;
-import beans.Operator;
+import beans.elements.Element;
+import beans.elements.Function;
+import beans.elements.Operand;
+import beans.elements.Operator;
 import support.adapters.Adapter;
 
 public class Constants {
