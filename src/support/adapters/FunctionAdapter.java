@@ -11,6 +11,7 @@ class FunctionAdapter {
     private boolean opened = false;
     private boolean closed = false;
 
+    /*It has to add possibility to handle functions in another functions*/
     String adaptFunctions(String s) {
         LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(s));
         final int END = a.size() - 1;
