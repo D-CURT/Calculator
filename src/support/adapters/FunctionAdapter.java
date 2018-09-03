@@ -1,6 +1,7 @@
 package support.adapters;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import static support.constants.Constants.*;
 import static support.constants.Constants.LEFT_BRACKET;
@@ -37,5 +38,12 @@ class FunctionAdapter {
             else result.append(current);
         }
         return result.toString();
+    }
+
+    List<String> replaceUnaryMinus(List<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            FUNCTION.setUnaryMinus(list, i);
+        }
+        return list;
     }
 }

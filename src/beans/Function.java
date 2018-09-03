@@ -49,9 +49,13 @@ public class Function extends AbstractElement {
     }
 
     public void setUnaryMinus(List<String> list, int i) {
-        String current = list.get(i);
-        if (current.equals(MINUS))
-            list.set(i, isUnaryMinus(list, i) ? UNARY_MINUS : current);
+        if (list != null) {
+            if (i >= 0 && i < list.size()) {
+                String current = list.get(i);
+                if (current.equals(MINUS))
+                    list.set(i, isUnaryMinus(list, i) ? UNARY_MINUS : current);
+            }
+        }
     }
 
     public boolean isUnaryMinus(List<String> list, int i) {
