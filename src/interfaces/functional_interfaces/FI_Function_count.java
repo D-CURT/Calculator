@@ -1,4 +1,4 @@
-package interfaces;
+package interfaces.functional_interfaces;
 
 @FunctionalInterface
 public interface FI_Function_count<T extends Number> {

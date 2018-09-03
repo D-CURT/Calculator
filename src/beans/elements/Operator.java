@@ -1,7 +1,7 @@
 package beans.elements;
 
 import abstractions.AbstractElement;
-import interfaces.FI_Operator_count;
+import interfaces.functional_interfaces.FI_Operator_count;
 import support.comparators.CharPriority;
 
 import java.util.Arrays;
@@ -39,6 +39,10 @@ public class Operator extends AbstractElement {
             this.function = function;
         }
 
+        public Double count(Double n1, Double n2) {
+            return function.count(n1, n2);
+        }
+
         public String getSymbol() {
             return symbol;
         }
@@ -46,6 +50,14 @@ public class Operator extends AbstractElement {
         public int getPriority() {
             return priority;
         }
+    }
+
+    public static int comparePriority(String s1, String s2) {
+        return new CharPriority().compare(s1, s2);
+    }
+
+    public boolean isBracket(String s) {
+        return s.equals(Content.LEFT_BRACKET.symbol) || s.equals(Content.RIGHT_BRACKET.symbol);
     }
 
     @Override
@@ -59,13 +71,5 @@ public class Operator extends AbstractElement {
     @Override
     public boolean found(String s) {
         return getElement(s).symbol.equals(s);
-    }
-
-    public static int comparePriority(String s1, String s2) {
-        return new CharPriority().compare(s1, s2);
-    }
-
-    public boolean isBracket(String s) {
-        return s.equals(Content.LEFT_BRACKET.symbol) || s.equals(Content.RIGHT_BRACKET.symbol);
     }
 }

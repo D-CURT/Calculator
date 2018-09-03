@@ -1,7 +1,7 @@
 package beans.elements;
 
 import abstractions.AbstractElement;
-import interfaces.FI_Function_count;
+import interfaces.functional_interfaces.FI_Function_count;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +28,10 @@ public class Function extends AbstractElement {
         Content(String value, FI_Function_count<Double> function) {
             this.value = value;
             this.function = function;
+        }
+
+        public Double count(Double n) {
+            return function.count(n);
         }
 
         public String getValue() {

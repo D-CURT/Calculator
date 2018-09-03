@@ -1,7 +1,7 @@
 package beans.elements;
 
 import abstractions.AbstractElement;
-import interfaces.FI_Operand_check;
+import interfaces.functional_interfaces.FI_Operand_check;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
