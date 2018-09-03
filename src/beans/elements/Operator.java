@@ -1,6 +1,7 @@
 package beans.elements;
 
 import abstractions.AbstractElement;
+import exceptions.CalculatorException;
 import interfaces.functional_interfaces.FI_Operator_count;
 import support.comparators.CharPriority;
 
@@ -13,7 +14,7 @@ public class Operator extends AbstractElement {
         PLUS("+", 2, (t1, t2) -> t1 + t2),
         MINUS("-", 2, (t1, t2) -> t1 - t2),
         MULTIPLY("*", 3, (t1, t2) -> t1 * t2),
-        DIVINE("/", 3, (t1, t2) -> t1 / t2),
+        DIVIDE("/", 3, Content::divide),
         PERCENT("%", 3, (t1, t2) -> (t1 * t2) / 100),
         POW("^", 4, Math::pow),
 
@@ -41,6 +42,11 @@ public class Operator extends AbstractElement {
 
         public Double count(Double n1, Double n2) {
             return function.count(n1, n2);
+        }
+
+        public static Double divide(Double n1, Double n2) {
+            if (n2 == 0) throw new CalculatorException("Division by zero!");
+            else return n1 / n2;
         }
 
         public String getSymbol() {
