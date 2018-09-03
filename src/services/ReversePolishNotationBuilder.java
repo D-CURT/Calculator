@@ -9,7 +9,7 @@ import static support.constants.Constants.*;
 public class ReversePolishNotationBuilder {
 
     public String toRPN(String s) {
-        return toRPN(ELEMENT.asElementsList(s));
+        return toRPN(ELEMENT.asElementsList(ADAPTER.adapt(s)));
     }
 
     /*Uncomment the method, when it will be need to use*/
