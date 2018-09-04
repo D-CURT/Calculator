@@ -2,11 +2,13 @@ package abstractions;
 
 import beans.Result;
 import exceptions.CalculatorException;
+import exceptions.ElementsNotAgreedException;
 import interfaces.I_MultipleCalculator;
 import services.ReversePolishNotationBuilder;
 
 import java.util.ArrayDeque;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
@@ -20,7 +22,7 @@ public abstract class AbstractCalculator implements I_MultipleCalculator {
         ArrayDeque<Double> numbers = new ArrayDeque<>();
         try {
             String rpn = new ReversePolishNotationBuilder().toRPN(expression);
-            double result;
+            double result = 0;
             double first;
             double second;
 
@@ -30,16 +32,20 @@ public abstract class AbstractCalculator implements I_MultipleCalculator {
             while (tokenizer.hasMoreTokens()) {
                 element = tokenizer.nextToken().trim();
                 if (OPERATOR.found(element)) {
-                    second = numbers.pop();
-                    first = numbers.pop();
-                    result = OPERATOR.getElement(element).count(first, second);
+                    if (numbers.size() > 1) {
+                        second = numbers.pop();
+                        first = numbers.pop();
+                        result = OPERATOR.getElement(element).count(first, second);
+                    } else throw new ElementsNotAgreedException();
                 } else if (FUNCTION.found(element)) {
-                    first = numbers.pop();
-                    result = FUNCTION.getElement(element).count(first);
+                    if (numbers.size() > 0) {
+                        first = numbers.pop();
+                        result = FUNCTION.getElement(element).count(first);
+                    } else throw new ElementsNotAgreedException();
                 } else result = Double.parseDouble(element);
                 numbers.push(result);
             }
-            if (numbers.size() > 1) throw new CalculatorException("The number of operands is not agreed.");
+            if (numbers.size() > 1) throw new ElementsNotAgreedException();
         } catch (CalculatorException e) {
             return new Result(expression, e.getMessage());
         }
