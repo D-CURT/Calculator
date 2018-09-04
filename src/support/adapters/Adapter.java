@@ -20,9 +20,11 @@ public class Adapter {
 
     private boolean isBracketsAgreed(String s) {
         int check = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') check++;
-            if (s.charAt(i) == ')') check--;
+        if (s.contains("()")) {
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '(') check++;
+                if (s.charAt(i) == ')') check--;
+            }
         }
         if (check != 0) throw new CalculatorException("Brackets are not agreed.");
         else return true;

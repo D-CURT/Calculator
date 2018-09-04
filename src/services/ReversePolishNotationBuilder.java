@@ -1,7 +1,6 @@
 package services;
 
 import beans.elements.Operator;
-import exceptions.CalculatorException;
 import exceptions.OperationNotFoundException;
 
 import java.util.*;
