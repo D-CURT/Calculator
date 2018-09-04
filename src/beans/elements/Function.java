@@ -47,6 +47,10 @@ public class Function extends AbstractElement {
                      .orElse(Content.DEFAULT);
     }
 
+    public boolean found(StringBuilder sb) {
+        return found(sb.toString());
+    }
+
     @Override
     public boolean found(String s) {
         return getElement(s).value.equals(s);

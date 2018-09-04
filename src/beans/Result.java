@@ -9,9 +9,6 @@ public class Result {
     private Double result;
     private String error;
 
-    public Result() {
-    }
-
     public Result(String expression, Double result) {
         this.expression = expression;
         this.result = result;

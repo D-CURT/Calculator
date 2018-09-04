@@ -9,9 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static support.constants.Constants.OPERAND;
-import static support.constants.Constants.OPERATOR;
-import static support.constants.Constants.POINT;
+import static support.constants.Constants.*;
 
 public class Element extends AbstractElement {
     public enum Content {
@@ -57,6 +55,7 @@ public class Element extends AbstractElement {
             element.append(chars[iterator]);
             iterator++;
             if (o == Operator.class || iterator == chars.length) break;
+            if (FUNCTION.found(element)) break;
         }
         return element.toString();
     }
