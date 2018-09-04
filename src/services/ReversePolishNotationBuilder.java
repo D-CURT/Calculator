@@ -2,6 +2,7 @@ package services;
 
 import beans.elements.Operator;
 import exceptions.CalculatorException;
+import exceptions.OperationNotFoundException;
 
 import java.util.*;
 
@@ -12,11 +13,6 @@ public class ReversePolishNotationBuilder {
     public String toRPN(String s) {
         return toRPN(ELEMENT.asElementsList(ADAPTER.adapt(s)));
     }
-
-    /*Uncomment the method, when it will be need to use*/
-    /*public List asList(String s) {
-        return ELEMENT.asElementsList(toRPN(s));
-    }*/
 
     private String toRPN(List<String> s) {
         ArrayDeque<String> operators = new ArrayDeque<>();
@@ -29,7 +25,7 @@ public class ReversePolishNotationBuilder {
                 replaceOperator(current, operators, result);
             } else if (FUNCTION.found(current)) {
                 operators.push(current);
-            }
+            } else throw new OperationNotFoundException(current);
         }
         while (!operators.isEmpty()) {
             result.append(operators.pop()).append(operators.isEmpty() ? EMPTY : SPACE);

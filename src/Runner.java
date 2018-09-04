@@ -6,7 +6,7 @@ import static support.constants.Constants.ADAPTER;
 public class Runner {
     public static void main(String[] args) {
         ReversePolishNotationBuilder polishNotationBuilder = new ReversePolishNotationBuilder();
-        String s = "sincos180";
+        String s = "3^2^2^2/1000-40000.021";
         System.out.println("Initial: " + s);
         String sa = ADAPTER.adapt(s);
         System.out.println("Adapted: " + sa);
