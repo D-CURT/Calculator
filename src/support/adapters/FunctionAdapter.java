@@ -15,6 +15,7 @@ class FunctionAdapter {
     String adaptFunctions(String s) {
         LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(s));
         final int END = a.size() - 1;
+        int lb_c = 0;
         String current;
         StringBuilder result = new StringBuilder();
 
@@ -31,9 +32,16 @@ class FunctionAdapter {
                     opened = false;
                 }
             }
-            if (opened) result.append(current).append(LEFT_BRACKET);
+            if (opened) {
+                result.append(current).append(LEFT_BRACKET);
+                lb_c++;
+            }
             else if (closed) {
-                result.append(current).append(RIGHT_BRACKET);
+                result.append(current);
+                while (lb_c > 0) {
+                    result.append(RIGHT_BRACKET);
+                    lb_c--;
+                }
                 closed = false;
             }
             else result.append(current);
