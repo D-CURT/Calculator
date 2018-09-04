@@ -22,11 +22,6 @@ public class Element extends AbstractElement {
         Content(FI_Element_found method) {
             this.method = method;
         }
-
-        /*Uncomment the method, when it will be need to use*/
-        /*public FI_Element_found getMethod() {
-            return method;
-        }*/
     }
 
     @Override
@@ -45,34 +40,23 @@ public class Element extends AbstractElement {
         return getElement(s).method != null;
     }
 
-    private String readElement(char[] chars, int iterator) {
-        return chars != null ? readElement(chars, iterator, getType(chars[iterator])) : null;
-    }
-
-    private String readElement(char[] chars, int iterator, Class<?> o) throws OperationNotFoundException {
-        StringBuilder element = new StringBuilder();
-        while (getType(chars[iterator]) == o) {
-            element.append(chars[iterator]);
-            iterator++;
-            if (o == Operator.class || iterator == chars.length) break;
-            if (FUNCTION.found(element)) break;
-        }
-        return element.toString();
-    }
-
     public List<String> asElementsList(String s) throws OperationNotFoundException {
         List<String> list = new LinkedList<>();
         if (!s.isEmpty()) {
-            Class<?> t;
+            StringBuilder element = new StringBuilder();
             char[] a = s.toCharArray();
-            for (int i = 0; i < a.length; i++) {
+            int i = 0;
+            Class<?> t;
+            while (i < a.length) {
                 t = getType(a[i]);
-                list.add(readElement(a, i));
                 while (getType(a[i]) == t) {
+                    element.append(a[i]);
                     i++;
                     if (t == Operator.class || i == a.length) break;
+                    if (FUNCTION.found(element)) break;
                 }
-                i--;
+                if (element.length() != 0) list.add(element.toString());
+                element.setLength(0);
             }
         }
         return list;
@@ -83,8 +67,9 @@ public class Element extends AbstractElement {
     }
 
     private Class<?> getType(String s) {
-        return (OPERATOR.getElement(s).getSymbol().equals(s)) ? Operator.class
-                : (OPERAND.getElement(s).getMethod() != null) ? Operand.class
-                : POINT.equals(s) ? Operand.class : null;
+        return (OPERATOR.getElement(s).getSymbol().equals(s)) ? Operator.class :
+               (OPERAND.getElement(s).getMethod() != null) ? Operand.class :
+               (POINT.equals(s)) ? Operand.class :
+               (FUNCTION.getElement(s).getValue().equals(s)) ? Function.class : null;
     }
 }
