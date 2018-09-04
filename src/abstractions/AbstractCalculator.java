@@ -2,6 +2,7 @@ package abstractions;
 
 import beans.Result;
 import exceptions.CalculatorException;
+import exceptions.OperationNotFoundException;
 import interfaces.I_MultipleCalculator;
 import services.ReversePolishNotationBuilder;
 

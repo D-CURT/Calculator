@@ -1,6 +1,7 @@
 package beans.elements;
 
 import abstractions.AbstractElement;
+import exceptions.OperationNotFoundException;
 import interfaces.functional_interfaces.FI_Element_found;
 import support.constants.Constants;
 
@@ -15,7 +16,8 @@ import static support.constants.Constants.POINT;
 public class Element extends AbstractElement {
     public enum Content {
         OPERAND(Constants.OPERAND::found),
-        OPERATOR(Constants.OPERATOR::found);
+        OPERATOR(Constants.OPERATOR::found),
+        FUNCTION(Constants.FUNCTION::found);
 
         private final FI_Element_found method;
 
@@ -32,7 +34,10 @@ public class Element extends AbstractElement {
     @Override
     public Content getElement(String s) {
         return Arrays.stream(Content.values())
-                     .filter(element -> Content.OPERAND.method.found(s) || Content.OPERATOR.method.found(s))
+                     .filter(element ->
+                                Content.OPERAND.method.found(s)
+                             || Content.OPERATOR.method.found(s)
+                             || Content.FUNCTION.method.found(s))
                      .findFirst()
                      .orElse(null);
     }
@@ -46,7 +51,7 @@ public class Element extends AbstractElement {
         return chars != null ? readElement(chars, iterator, getType(chars[iterator])) : null;
     }
 
-    private String readElement(char[] chars, int iterator, Class<?> o) {
+    private String readElement(char[] chars, int iterator, Class<?> o) throws OperationNotFoundException {
         StringBuilder element = new StringBuilder();
         while (getType(chars[iterator]) == o) {
             element.append(chars[iterator]);
@@ -56,7 +61,7 @@ public class Element extends AbstractElement {
         return element.toString();
     }
 
-    public List<String> asElementsList(String s) {
+    public List<String> asElementsList(String s) throws OperationNotFoundException {
         List<String> list = new LinkedList<>();
         if (!s.isEmpty()) {
             Class<?> t;
