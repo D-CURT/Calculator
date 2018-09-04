@@ -21,7 +21,7 @@ public abstract class AbstractCalculator implements I_MultipleCalculator {
         ArrayDeque<Double> numbers = new ArrayDeque<>();
         try {
             String rpn = new ReversePolishNotationBuilder().toRPN(expression);
-            double result = 0;
+            double result;
             double first;
             double second;
 
