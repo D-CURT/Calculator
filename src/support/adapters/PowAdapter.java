@@ -103,9 +103,7 @@ class PowAdapter {
                             toResult(tmp, result, current);
                         }
                     }
-                } else {
-                    toResult(tmp, result, current);
-                }
+                } else toResult(tmp, result, current);
             }
             input = result.toString();
             input = input.replaceAll(OPENED, LEFT_BRACKET).replaceAll(CLOSED, RIGHT_BRACKET);
