@@ -1,5 +1,7 @@
 package support.adapters;
 
+import exceptions.ElementsNotAgreedException;
+
 import java.util.LinkedList;
 
 import static support.constants.Constants.*;
@@ -18,7 +20,7 @@ class PowAdapter {
     }
 
     private void toResult(StringBuilder tmp, StringBuilder result, String current) {
-        result.append(tmp).append(current);
+        result.append(tmp.length() > 0 ? tmp : EMPTY).append(current);
         tmp.setLength(0);
     }
 
@@ -48,7 +50,7 @@ class PowAdapter {
                 count++;
                 if (!opened) opened = true;
             }
-        }
+        } throw new ElementsNotAgreedException();
     }
 
     String setPriority(String input) {
@@ -96,17 +98,13 @@ class PowAdapter {
                         } else {
                             remove(tmp);
                             tmp.append(current);
-                            current = "";
+                            current = EMPTY;
                             close(tmp);
                             toResult(tmp, result, current);
                         }
                     }
                 } else {
-                    if (tmp.length() > 0) {
-                        result.append(tmp);
-                        tmp.setLength(0);
-                    }
-                    result.append(current);
+                    toResult(tmp, result, current);
                 }
             }
             input = result.toString();
