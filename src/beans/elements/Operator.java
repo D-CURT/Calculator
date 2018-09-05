@@ -3,7 +3,7 @@ package beans.elements;
 import abstractions.AbstractElement;
 import exceptions.CalculatorException;
 import interfaces.functional_interfaces.FI_Operator_count;
-import support.BracketsManager;
+import beans.elements.sub_elements.BracketsManager;
 import support.comparators.CharPriority;
 
 import java.util.Arrays;

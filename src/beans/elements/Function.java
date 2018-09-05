@@ -2,7 +2,7 @@ package beans.elements;
 
 import abstractions.AbstractElement;
 import interfaces.functional_interfaces.FI_Function_count;
-import support.UnaryMinusManager;
+import beans.elements.sub_elements.UnaryMinusManager;
 
 import java.util.Arrays;
 
