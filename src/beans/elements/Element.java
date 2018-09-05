@@ -5,8 +5,8 @@ import exceptions.OperationNotFoundException;
 import interfaces.functional_interfaces.FI_Element_found;
 import support.constants.Constants;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static support.constants.Constants.*;
@@ -40,7 +40,7 @@ public class Element extends AbstractElement {
     }
 
     public List<String> asElementsList(String s) throws OperationNotFoundException {
-        List<String> list = new LinkedList<>();
+        List<String> list = new ArrayList<>();
         if (!s.isEmpty()) {
             StringBuilder element = new StringBuilder();
             char[] a = s.toCharArray();

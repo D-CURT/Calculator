@@ -1,7 +1,5 @@
 package support.adapters;
 
-import exceptions.CalculatorException;
-
 import static support.constants.Constants.*;
 
 public class Adapter {

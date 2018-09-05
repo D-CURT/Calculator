@@ -19,7 +19,7 @@ public class Result {
         this.error = error;
     }
 
-    public boolean hasError() {
+    private boolean hasError() {
         return error != null;
     }
 
@@ -36,7 +36,7 @@ public class Result {
         return df.format(result);
     }
 
-    public String getError() {
+    private String getError() {
         return error;
     }
 }

@@ -67,7 +67,6 @@ class PowAdapter {
             String current;
             StringBuilder result = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
-
             for (i = 0; i < list.size(); i++) {
                 current = list.get(i);
                 if (current.equals(POW)) {
