@@ -7,7 +7,7 @@ import support.UnaryMinusManager;
 import java.util.Arrays;
 
 public class Function extends AbstractElement {
-    public final static UnaryMinusManager um = new UnaryMinusManager();
+    public final UnaryMinusManager um = new UnaryMinusManager();
 
     public enum Content {
         SIN("sin", n -> Math.sin(Math.toRadians(n))),

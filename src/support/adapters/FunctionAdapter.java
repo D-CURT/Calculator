@@ -54,7 +54,7 @@ class FunctionAdapter {
     String replaceUnaryMinus(List<String> list) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
-            Function.um.setUnaryMinus(list, i);
+            FUNCTION.um.setUnaryMinus(list, i);
             builder.append(list.get(i));
         }
         return builder.toString();
