@@ -68,8 +68,8 @@ public class Element extends AbstractElement {
 
     private Class<?> getType(String s) {
         return (OPERATOR.getElement(s).getSymbol().equals(s)) ? Operator.class :
+               (FUNCTION.getElement(s).getValue().equals(s)) ? Function.class :
                (OPERAND.getElement(s).getMethod() != null) ? Operand.class :
-               (POINT.equals(s)) ? Operand.class :
-               (FUNCTION.getElement(s).getValue().equals(s)) ? Function.class : null;
+               (POINT.equals(s)) ? Operand.class : null;
     }
 }
