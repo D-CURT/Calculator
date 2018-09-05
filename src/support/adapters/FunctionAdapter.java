@@ -1,31 +1,36 @@
 package support.adapters;
 
-import beans.elements.Function;
-
 import java.util.LinkedList;
 import java.util.List;
 
 import static support.constants.Constants.*;
-import static support.constants.Constants.LEFT_BRACKET;
-import static support.constants.Constants.RIGHT_BRACKET;
 
 class FunctionAdapter {
+    private List<String> list;
+    private int end;
+    private int i;
     private boolean opened = false;
     private boolean closed = false;
 
+    FunctionAdapter init(List<String> list) {
+        this.list = list;
+        end = list.size() - 1;
+        return this;
+    }
+
     /*It has to add possibility to handle functions in another functions*/
-    String adaptFunctions(String s) {
-        LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(s));
-        final int END = a.size() - 1;
+    String adaptFunctions() {
+        //LinkedList<String> a = new LinkedList<>(ELEMENT.asElementsList(s));
+        //final int END = a.size() - 1;
         int lb_c = 0;
         String current;
         StringBuilder result = new StringBuilder();
 
 
-        for (int i = 0; i < a.size(); i++) {
-            current = a.get(i);
+        for (i = 0; i < list.size(); i++) {
+            current = list.get(i);
             if (FUNCTION.found(current)) {
-                if (i != END && !a.get(i + 1).equals(LEFT_BRACKET)) {
+                if (i != end && !list.get(i + 1).equals(LEFT_BRACKET)) {
                     opened = true;
                 }
             } else if (opened) {
@@ -51,9 +56,9 @@ class FunctionAdapter {
         return result.toString();
     }
 
-    String replaceUnaryMinus(List<String> list) {
+    String replaceUnaryMinus() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
+        for (i = 0; i < list.size(); i++) {
             FUNCTION.um.setUnaryMinus(list, i);
             builder.append(list.get(i));
         }

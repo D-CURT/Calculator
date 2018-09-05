@@ -11,9 +11,9 @@ public class Adapter {
     public String adapt(String s) {
         if (OPERATOR.bracket.areBracketsAgreed(s)) {
             s = s.replaceAll(COMMA, POINT).replaceAll(SPACE, EMPTY);
-            s = FUNCTION_ADAPTER.replaceUnaryMinus(ELEMENT.asElementsList(s));
-            s = FUNCTION_ADAPTER.adaptFunctions(s);
-            s = POW_ADAPTER.setPriority(s);
+            s = FUNCTION_ADAPTER.init(ELEMENT.asElementsList(s)).replaceUnaryMinus();
+            s = FUNCTION_ADAPTER.init(ELEMENT.asElementsList(s)).adaptFunctions();
+            s = POW_ADAPTER.init(ELEMENT.asElementsList(s)).setPriority(s);
             System.out.println("Adapted: " + s);
         }
         return s;
