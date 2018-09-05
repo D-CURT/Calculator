@@ -35,7 +35,7 @@ public class ReversePolishNotationBuilder {
 
     private void replaceOperator(String current, ArrayDeque<String> operators,
                                  StringBuilder result) {
-        if (OPERATOR.isBracket(current)) {
+        if (OPERATOR.bracket.isBracket(current)) {
             replaceBrackets(current, operators, result);
         } else {
             if (!operators.isEmpty()) {

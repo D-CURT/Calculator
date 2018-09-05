@@ -3,11 +3,14 @@ package beans.elements;
 import abstractions.AbstractElement;
 import exceptions.CalculatorException;
 import interfaces.functional_interfaces.FI_Operator_count;
+import support.BracketsManager;
 import support.comparators.CharPriority;
 
 import java.util.Arrays;
 
 public class Operator extends AbstractElement {
+    public final BracketsManager bracket = new BracketsManager();
+
     public enum Content {
         LEFT_BRACKET("(", 1),
         RIGHT_BRACKET(")", 1),
@@ -60,10 +63,6 @@ public class Operator extends AbstractElement {
 
     public static int comparePriority(String s1, String s2) {
         return new CharPriority().compare(s1, s2);
-    }
-
-    public boolean isBracket(String s) {
-        return s.equals(Content.LEFT_BRACKET.symbol) || s.equals(Content.RIGHT_BRACKET.symbol);
     }
 
     @Override

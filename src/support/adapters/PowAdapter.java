@@ -65,7 +65,7 @@ class PowAdapter {
                     open(a, i, tmp);
                 } else if (opened) {
                     if (OPERATOR.found(current)) {
-                        if (!OPERATOR.isBracket(current)) {
+                        if (!OPERATOR.bracket.isBracket(current)) {
                             if (!bracket_UP) {
                                 if (!current.equals(POW)) {
                                     remove(tmp);
@@ -87,7 +87,7 @@ class PowAdapter {
                         if (bracket_UP) tmp.append(current);
                     } else {
                         if (i != end) {
-                            if (OPERATOR.isBracket(a.get(i + 1))) {
+                            if (OPERATOR.bracket.isBracket(a.get(i + 1))) {
                                 if (tmp.lastIndexOf(OPENED) == tmp.length() - 1) {
                                     remove(tmp);
                                 }
