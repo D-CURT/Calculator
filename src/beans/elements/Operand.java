@@ -1,7 +1,7 @@
 package beans.elements;
 
 import abstractions.AbstractElement;
-import interfaces.functional_interfaces.FI_Operand_check;
+import interfaces.functional_interfaces.FI_Element_found;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -16,16 +16,16 @@ public class Operand extends AbstractElement {
 
         DEFAULT();
 
-        private FI_Operand_check method;
+        private FI_Element_found method;
 
         Content() {
         }
 
-        Content(FI_Operand_check method) {
+        Content(FI_Element_found method) {
             this.method = method;
         }
 
-        public FI_Operand_check getMethod() {
+        public FI_Element_found getMethod() {
             return method;
         }
     }
@@ -33,7 +33,7 @@ public class Operand extends AbstractElement {
     @Override
     public Content getElement(String s) {
         return Arrays.stream(Content.values())
-                     .filter(operand -> Content.INTEGER.method.check(s) || Content.FRACTIONAL.method.check(s))
+                     .filter(operand -> Content.INTEGER.method.found(s) || Content.FRACTIONAL.method.found(s))
                      .findFirst()
                      .orElse(Content.DEFAULT);
     }
