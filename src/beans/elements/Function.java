@@ -5,9 +5,6 @@ import interfaces.functional_interfaces.FI_Function_count;
 import support.UnaryMinusManager;
 
 import java.util.Arrays;
-import java.util.List;
-
-import static support.constants.Constants.*;
 
 public class Function extends AbstractElement {
     public final static UnaryMinusManager um = new UnaryMinusManager();
