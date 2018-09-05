@@ -27,10 +27,9 @@ public class Element extends AbstractElement {
     @Override
     public Content getElement(String s) {
         return Arrays.stream(Content.values())
-                     .filter(element ->
-                                Content.OPERAND.method.found(s)
-                             || Content.OPERATOR.method.found(s)
-                             || Content.FUNCTION.method.found(s))
+                     .filter(element -> Content.OPERAND.method.found(s)
+                                     || Content.OPERATOR.method.found(s)
+                                     || Content.FUNCTION.method.found(s))
                      .findFirst()
                      .orElse(null);
     }
