@@ -14,6 +14,7 @@ public class Adapter {
             s = FUNCTION_ADAPTER.replaceUnaryMinus(ELEMENT.asElementsList(s));
             s = FUNCTION_ADAPTER.adaptFunctions(s);
             s = POW_ADAPTER.setPriority(s);
+            System.out.println("Adapted: " + s);
         }
         return s;
     }

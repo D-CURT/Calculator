@@ -2,6 +2,7 @@ package beans.elements;
 
 import abstractions.AbstractElement;
 import interfaces.functional_interfaces.FI_Function_count;
+import support.UnaryMinusManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +10,12 @@ import java.util.List;
 import static support.constants.Constants.*;
 
 public class Function extends AbstractElement {
+    public UnaryMinusManager um;
+
+    public Function() {
+        um = new UnaryMinusManager();
+    }
+
     public enum Content {
         SIN("sin", n -> Math.sin(Math.toRadians(n))),
         COS("cos", n -> Math.cos(Math.toRadians(n))),
@@ -54,20 +61,5 @@ public class Function extends AbstractElement {
     @Override
     public boolean found(String s) {
         return getElement(s).value.equals(s);
-    }
-
-    public void setUnaryMinus(List<String> list, int i) {
-        if (list != null) {
-            String current = list.get(i);
-            if (current.equals(MINUS))
-                list.set(i, isUnaryMinus(list, i) ? UNARY_MINUS : current);
-        }
-    }
-
-    private boolean isUnaryMinus(List<String> list, int i) {
-        return (list.size() != 1 && i == 0 && OPERAND.found(list.get(i + 1)))
-                || (i != list.size() - 1 && i != 0 && list.get(i - 1).equals(LEFT_BRACKET) && OPERAND.found(list.get(i + 1)))
-                || (i != list.size() - 1 && i != 0 && (OPERATOR.found(list.get(i - 1)) )) && !list.get(i - 1).equals(RIGHT_BRACKET)
-                && (OPERAND.found(list.get(i + 1)) || list.get(i + 1).equals(LEFT_BRACKET));
     }
 }

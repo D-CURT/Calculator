@@ -29,7 +29,7 @@ public class ReversePolishNotationBuilder {
         while (!operators.isEmpty()) {
             result.append(operators.pop()).append(operators.isEmpty() ? EMPTY : SPACE);
         }
-
+        System.out.println("Reversed: " + result);
         return result.toString();
     }
 
