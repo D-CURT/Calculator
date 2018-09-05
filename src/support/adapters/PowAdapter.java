@@ -50,7 +50,7 @@ class PowAdapter {
                 count++;
                 if (!opened) opened = true;
             }
-        } throw new ElementsNotAgreedException();
+        }
     }
 
     String setPriority(String input) {
