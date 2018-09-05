@@ -10,11 +10,7 @@ import java.util.List;
 import static support.constants.Constants.*;
 
 public class Function extends AbstractElement {
-    public UnaryMinusManager um;
-
-    public Function() {
-        um = new UnaryMinusManager();
-    }
+    public final static UnaryMinusManager um = new UnaryMinusManager();
 
     public enum Content {
         SIN("sin", n -> Math.sin(Math.toRadians(n))),
