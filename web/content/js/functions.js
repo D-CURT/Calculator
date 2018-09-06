@@ -1,19 +1,19 @@
 function insertNumber(element) {
-    document.inputForm.resultArea.value = document.inputForm.resultArea.value + element;
+    document.inputForm.result.value = document.inputForm.result.value + element;
 }
 
 function equal() {
-    var expression = document.inputForm.resultArea.value;
+    var expression = document.inputForm.result.value;
     if (expression) {
-        document.inputForm.resultArea.value = eval(expression);
+        document.inputForm.result.value = eval(expression);
     }
 }
 
 function clean() {
-    document.inputForm.resultArea.value = "";
+    document.inputForm.result.value = "";
 }
 
 function backSpace() {
-    var expression = document.inputForm.resultArea.value;
-    document.inputForm.resultArea.value = expression.substring(0, expression.length - 1);
+    var expression = document.inputForm.result.value;
+    document.inputForm.result.value = expression.substring(0, expression.length - 1);
 }

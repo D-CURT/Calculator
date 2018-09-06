@@ -10,7 +10,7 @@
 <body>
     <div class="wrapper">
         <form action="input" name="inputForm" method="get">
-                <input class="resultArea" name="resultArea" type="text" value="">
+                <input class="resultArea" name="result" type="text" value="">
         </form>
             <table>
                 <tr>
