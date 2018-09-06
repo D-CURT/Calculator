@@ -14,8 +14,8 @@
         </form>
             <table>
                 <tr>
-                    <td><input class="button" type="button" value="C" ></td>
-                    <td><input class="button" type="button" value="<"></td>
+                    <td><input class="button" type="button" value="C" onclick="clean()"></td>
+                    <td><input class="button" type="button" value="<" onclick="backSpace()"></td>
                     <td><input class="button" type="button" value="/" onclick="insertNumber('/')"></td>
                     <td><input class="button" type="button" value="x" onclick="insertNumber('*')"></td>
                 </tr>
@@ -35,7 +35,11 @@
                     <td><input class="button" type="button" value="1" onclick="insertNumber(1)"></td>
                     <td><input class="button" type="button" value="2" onclick="insertNumber(2)"></td>
                     <td><input class="button" type="button" value="3" onclick="insertNumber(3)"></td>
-                    <td><input class="button" type="button" value="=" onclick="equal()"></td>
+                    <td rowspan="2"><input class="button" style="height: 108px" type="button" value="=" onclick="equal()"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input class="button" style="width: 108px" type="button" value="0" onclick="insertNumber(0)"></td>
+                    <td><input class="button" type="button" value="." onclick="insertNumber('.')"></td>
                 </tr>
             </table>
     </div>
