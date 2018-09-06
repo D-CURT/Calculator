@@ -1,5 +1,7 @@
 package support.adapters;
 
+import exceptions.ElementsNotAgreedException;
+
 import java.util.List;
 
 import static support.constants.Constants.*;
@@ -56,8 +58,11 @@ class PowAdapter {
             if (next.equals(LEFT_BRACKET))
                 tmp.append(current);
             else {
-                count++;
-                if (!opened) opened = true;
+                if (OPERATOR.found(next)) throw new ElementsNotAgreedException();
+                else {
+                    count++;
+                    if (!opened) opened = true;
+                }
             }
         }
     }
@@ -108,8 +113,10 @@ class PowAdapter {
                     }
                 } else toResult(tmp, result, current);
             }
-            input = result.toString();
-            input = input.replaceAll(OPENED, LEFT_BRACKET).replaceAll(CLOSED, RIGHT_BRACKET);
+            if (result.length() > 0) {
+                input = result.toString();
+                input = input.replaceAll(OPENED, LEFT_BRACKET).replaceAll(CLOSED, RIGHT_BRACKET);
+            } else throw new ElementsNotAgreedException();
         }
         return input;
     }
