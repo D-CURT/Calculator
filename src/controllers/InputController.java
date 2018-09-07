@@ -17,7 +17,6 @@ public class InputController extends HttpServlet {
         request.setAttribute("result",
                 new Calculator().calculate(request.getParameter("result")).getResult());
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

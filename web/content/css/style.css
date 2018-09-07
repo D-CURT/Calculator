@@ -1,3 +1,12 @@
+
+#back {
+    background: #6d8e96;
+    color: white;
+}
+#clean {
+    background: #a92424ad;
+    color: white;
+}
 .wrapper {
     width: 800px;
     margin: 0 auto;

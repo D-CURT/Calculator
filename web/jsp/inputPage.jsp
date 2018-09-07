@@ -14,8 +14,9 @@
         </form>
             <table>
                 <tr>
-                    <td><input class="button" type="button" value="C" onclick="clean()"></td>
-                    <td colspan="2"><input class="button" type="button" value="<" onclick="backSpace()"></td>
+                    <td><input class="button" id="clean" type="button" value="C" onclick="clean()"></td>
+                    <td><input class="button" id="back" type="button" value="<" onclick="backSpace()"></td>
+                    <td><input class="button" type="button" value="%" onclick="insert('%')"></td>
                     <td><input class="button" type="button" value="^" onclick="insert('^')"></td>
                 </tr>
                 <tr>
