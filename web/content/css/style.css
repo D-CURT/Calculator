@@ -23,6 +23,7 @@
     cursor: pointer;
 }
 .resultArea {
+    text-align: right;
     width: 223px;
     margin: 5px;
     font-size: 25px;
