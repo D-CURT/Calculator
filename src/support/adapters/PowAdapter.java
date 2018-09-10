@@ -6,7 +6,7 @@ import java.util.List;
 
 import static support.constants.Constants.*;
 
-class PowAdapter {
+class PowAdapter extends Adapter {
     private List<String> list;
     private int end;
     private int i;
@@ -18,11 +18,10 @@ class PowAdapter {
     private boolean opened = false;
     private int count;
 
-    PowAdapter init(List<String> list) {
+    private void init(List<String> list) {
         this.list = list;
         end = list.size() - 1;
         count = 0;
-        return this;
     }
 
     private void toResult(StringBuilder tmp, StringBuilder result, String current) {
@@ -67,11 +66,13 @@ class PowAdapter {
         }
     }
 
-    String setPriority(String input) {
+    @Override
+    public String adapt(String input) {
         if (input.contains(POW)) {
             String current;
             StringBuilder result = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
+            init(ELEMENT.asElementsList(input));
             for (i = 0; i < list.size(); i++) {
                 current = list.get(i);
                 if (current.equals(POW)) {

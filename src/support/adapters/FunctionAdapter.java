@@ -4,23 +4,25 @@ import java.util.List;
 
 import static support.constants.Constants.*;
 
-class FunctionAdapter {
+class FunctionAdapter extends Adapter {
     private List<String> list;
     private int end;
     private int i;
     private boolean opened = false;
     private boolean closed = false;
 
-    FunctionAdapter init(List<String> list) {
+    private void init(List<String> list) {
         this.list = list;
         end = list.size() - 1;
-        return this;
     }
 
-    String adaptFunctions() {
+    @Override
+    public String adapt(String s) {
         int lb_c = 0;
         String current;
         StringBuilder result = new StringBuilder();
+        init(ELEMENT.asElementsList(s));
+        replaceUnaryMinus();
 
 
         for (i = 0; i < list.size(); i++) {
@@ -49,12 +51,8 @@ class FunctionAdapter {
         return result.toString();
     }
 
-    String replaceUnaryMinus() {
-        StringBuilder builder = new StringBuilder();
-        for (i = 0; i < list.size(); i++) {
+     private void replaceUnaryMinus() {
+        for (i = 0; i < list.size(); i++)
             FUNCTION.um.setUnaryMinus(list, i);
-            builder.append(list.get(i));
-        }
-        return builder.toString();
     }
 }
