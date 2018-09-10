@@ -4,7 +4,7 @@ import abstractions.AbstractElement;
 import exceptions.CalculatorException;
 import interfaces.functional_interfaces.FI_Operator_count;
 import beans.elements.sub_elements.BracketsManager;
-import support.comparators.CharPriority;
+import support.comparators.ElementPriority;
 
 import java.util.Arrays;
 
@@ -61,8 +61,12 @@ public class Operator extends AbstractElement {
         }
     }
 
+    public int getPriority(String s) {
+        return getElement(s).getPriority();
+    }
+
     public static int comparePriority(String s1, String s2) {
-        return new CharPriority().compare(s1, s2);
+        return new ElementPriority().compare(s1, s2);
     }
 
     @Override
