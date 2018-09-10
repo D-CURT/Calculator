@@ -5,8 +5,8 @@ import exceptions.CalculatorException;
 import static support.constants.Constants.*;
 
 public class Adapter {
-    private static final PowAdapter POW_ADAPTER = new PowAdapter();
-    private static final FunctionAdapter FUNCTION_ADAPTER = new FunctionAdapter();
+    private final PowAdapter POW_ADAPTER = new PowAdapter();
+    private final FunctionAdapter FUNCTION_ADAPTER = new FunctionAdapter();
 
     public String adapt(String s) {
         if (verifier(s)) {
