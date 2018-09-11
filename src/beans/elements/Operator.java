@@ -1,14 +1,14 @@
 package beans.elements;
 
-import abstractions.AbstractElement;
 import exceptions.CalculatorException;
+import interfaces.I_Element;
 import interfaces.functional_interfaces.FI_Operator_count;
 import beans.elements.sub_elements.BracketsManager;
 import support.comparators.ElementPriority;
 
 import java.util.Arrays;
 
-public class Operator extends AbstractElement {
+public class Operator implements I_Element {
     public final BracketsManager bracket = new BracketsManager();
 
     public enum Content {

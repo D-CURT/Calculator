@@ -1,7 +1,7 @@
 package beans.elements;
 
-import abstractions.AbstractElement;
 import exceptions.OperationNotFoundException;
+import interfaces.I_Element;
 import interfaces.functional_interfaces.FI_Element_found;
 import support.constants.Constants;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static support.constants.Constants.*;
 
-public class Element extends AbstractElement {
+public class Element implements I_Element {
     public enum Content {
         OPERAND(Constants.OPERAND::found),
         OPERATOR(Constants.OPERATOR::found),

@@ -1,12 +1,12 @@
 package beans.elements;
 
-import abstractions.AbstractElement;
+import interfaces.I_Element;
 import interfaces.functional_interfaces.FI_Function_count;
 import beans.elements.sub_elements.UnaryMinusManager;
 
 import java.util.Arrays;
 
-public class Function extends AbstractElement {
+public class Function implements I_Element {
     public final UnaryMinusManager um = new UnaryMinusManager();
 
     public enum Content {

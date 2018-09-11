@@ -1,6 +1,6 @@
 package beans.elements;
 
-import abstractions.AbstractElement;
+import interfaces.I_Element;
 import interfaces.functional_interfaces.FI_Element_found;
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import static support.constants.Constants.FRACTIONAL_REGEX;
 import static support.constants.Constants.INTEGER_REGEX;
 
-public class Operand extends AbstractElement {
+public class Operand implements I_Element {
     public enum Content {
         INTEGER(s -> Pattern.compile(INTEGER_REGEX).matcher(s).find()),
         FRACTIONAL(s -> Pattern.compile(FRACTIONAL_REGEX).matcher(s).find()),
