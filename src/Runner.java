@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static support.constants.Constants.ADAPTER;
+import static support.constants.Constants.EMPTY;
 
 public class Runner {
     public static void main(String[] args) {
