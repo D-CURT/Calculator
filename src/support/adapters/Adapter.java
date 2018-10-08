@@ -14,7 +14,7 @@ public class Adapter {
                 System.out.println("Adapted: " + s);
             }
             return s;
-        } throw new CalculatorException("The expression does not exist.");
+        } throw new CalculatorException("The expression is empty.");
     }
 
     private boolean verifier(String s) {
