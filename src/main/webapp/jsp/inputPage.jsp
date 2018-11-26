@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Input Page</title>
-    <script type="text/javascript" src="content/js/functions.js"></script>
+    <script type="text/javascript" src="../content/js/functions.js"></script>
     <style>
         <%@include file="/content/css/style.css"%>
     </style>
